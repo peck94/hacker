@@ -113,12 +113,26 @@ void Shell::addCredentials(string username, string password) {
     creds.push_back(pair<string, string>{username, password});
 }
 
+bool Shell::hasUser(string user) {
+    for(pair<string, string> c: creds) {
+        if(c.first == user) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 void Shell::addLog(string entry) {
     logs.push_back(new LogEntry{localhost->getIP(), entry});
 }
 
 void Shell::clearLogs() {
     logs.clear();
+}
+
+pair<string, string> Shell::getSession() {
+    return session;
 }
 
 Shell::~Shell() {

@@ -19,4 +19,8 @@ Localhost::Localhost(): Host(new IP()) {
     ftp->addVuln(LOG_DELETER);
     ftp->upload(new File{"motd", 1337});
     addService(ftp);
+    
+    SMTPService *smtp = new SMTPService(6);
+    smtp->getShell()->addCredentials("smtp", "smtp");
+    addService(smtp);
 }

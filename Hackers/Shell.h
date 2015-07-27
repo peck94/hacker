@@ -55,14 +55,21 @@ public:
     // register credentials
     void addCredentials(std::string username, std::string password);
     
+    // check credentials
+    bool hasUser(std::string user);
+    
     // run with prompt
     void run(Host *host, std::string prompt);
     
     // add log entry
     void addLog(std::string entry);
+    void addLog(std::string ip, std::string entry);
     
     // clear logs
     void clearLogs();
+    
+    // getters
+    std::pair<std::string, std::string> getSession();
     
     ~Shell();
 };

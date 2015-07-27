@@ -13,6 +13,7 @@
 #include "SSHService.h"
 #include "FTPService.h"
 #include "LogDeleter.h"
+#include "SMTPService.h"
 
 class Localhost: public Host {
 public:

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>03227D2F-F8AE-4593-938D-53CAA331A785</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Hackers</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D6B47CA44828AF4A7744153DA19090585942D4A8</key>
+		<string>github.com:peck94/hacker.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Hackers.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D6B47CA44828AF4A7744153DA19090585942D4A8</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:peck94/hacker.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D6B47CA44828AF4A7744153DA19090585942D4A8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D6B47CA44828AF4A7744153DA19090585942D4A8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Hackers</string>
+		</dict>
+	</array>
+</dict>
+</plist>
