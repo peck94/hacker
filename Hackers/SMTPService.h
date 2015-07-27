@@ -15,8 +15,10 @@
 struct Email {
     // IP of sender
     std::string ipSender;
+    // username of source
+    std::string nameSource;
     // username of target
-    std::string name;
+    std::string nameTarget;
     // subject line
     std::string subject;
     // body of email

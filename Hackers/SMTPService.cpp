@@ -22,22 +22,22 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
         cout << "Messages for " << name << ":" << endl;
         for(int i = 0; i < emails[name].size(); i++) {
             Email *email = emails[name][i];
-            if(email->name == name) {
+            if(email->nameTarget == name) {
                 cout << i+1 << ". " << email->subject << endl;
             }
         }
     }, true);
     getShell()->add("send", [this] (vector<string> args) {
         // send email
-        string ipSender;
+        string ipRecv;
         cout << "Receiver IP: ";
-        getline(cin, ipSender);
+        getline(cin, ipRecv);
         // resolve ip
-        if(!localhost->ping(ipSender)) {
+        if(!localhost->ping(ipRecv)) {
             cout << "Destination host unreachable." << endl;
             return;
         }
-        Host *remote = localhost->resolve(ipSender);
+        Host *remote = localhost->resolve(ipRecv);
         if(!remote->hasService(25)) {
             cout << "Remote SMTP service is not responding." << endl;
             return;
@@ -65,20 +65,37 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
             body+= line + "\n";
         }
         
-        Email *email = new Email{ipSender, name, subject, body};
+        string localname = getShell()->getSession().first;
+        string ipSender = localhost->getIP()->toString();
+        Email *email = new Email{ipSender, localname, name, subject, body};
         s->recv(email);
-        cout << "E-mail sent to " << name << "@" << ipSender << "." << endl;
+        cout << "E-mail sent to " << name << "@" << ipRecv << " from " << localname << "@" << ipSender << "." << endl;
     }, true);
     getShell()->add("show", [this] (vector<string> args) {
+        if(args.size() < 2) {
+            cout << "Please specify a number." << endl;
+            return;
+        }
         
+        int index = stoi(args[1])-1;
+        string name = getShell()->getSession().first;
+        if(emails.find(name) == emails.end() || emails[name].size() <= index) {
+            cout << "No such e-mail." << endl;
+            return;
+        }
+        
+        Email *email = emails[name][index];
+        cout << "Sender: " << email->nameSource << "@" << email->ipSender << endl;
+        cout << "Subject: " << email->subject << endl;
+        cout << email->body << endl;
     }, true);
 }
 
 void SMTPService::recv(Email *email) {
-    if(emails.find(email->name) == emails.end()) {
-        emails[email->name] = vector<Email*>{email};
+    if(emails.find(email->nameTarget) == emails.end()) {
+        emails[email->nameTarget] = vector<Email*>{email};
     }else{
-        emails[email->name].push_back(email);
+        emails[email->nameTarget].push_back(email);
     }
 }
 
