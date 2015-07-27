@@ -13,6 +13,11 @@
 #include <vector>
 #include <functional>
 #include "Host.h"
+#include "Localhost.h"
+#include "SSHService.h"
+#include "FTPService.h"
+#include "SMTPService.h"
+#include "FinanceService.h"
 
 typedef std::function<Service*(unsigned int)> factory;
 
@@ -27,6 +32,10 @@ private:
     std::vector<factory> services;
     // store max version
     unsigned int maxVersion;
+    // store size
+    unsigned int size;
+    // store localhost
+    Host *localhost;
 
     // generate random service
     Service* randomService();
@@ -38,8 +47,14 @@ public:
     // init with size and max program version
     Internet(unsigned int size, unsigned int maxVersion);
     
+    // create the network
+    void generate();
+    
     // register a service
     void registerService(factory f);
+    
+    // get local host
+    Host* getLocalhost();
     
     ~Internet();
 };

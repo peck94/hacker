@@ -35,6 +35,7 @@ public:
     FTPService(unsigned int version);
     
     virtual void run(Host *host);
+    virtual void randomInit();
     
     // add file
     void upload(File *file);

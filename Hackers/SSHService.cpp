@@ -53,7 +53,7 @@ SSHService::SSHService(unsigned int version): ShellService("SSH", 22, version) {
     shell->add("netstat", [this] (vector<string> args) {
         cout << "Active network connections:" << endl;
         for(Host* host: localhost->getLinks()) {
-            cout << host->getIP() << endl;
+            cout << host->getIP()->toString() << endl;
         }
     }, true);
     shell->add("ping", [this] (vector<string> args) {
@@ -88,6 +88,10 @@ void SSHService::run(Host* host) {
 
     // shell
     getShell()->run(host, "$");
+}
+
+void SSHService::randomInit() {
+    // TODO
 }
 
 void SSHService::addProgram(Program *program) {

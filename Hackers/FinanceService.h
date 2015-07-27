@@ -47,6 +47,7 @@ public:
     void clearLog(std::string name);
     
     virtual void run(Host *host);
+    virtual void randomInit();
     
     ~FinanceService();
 };

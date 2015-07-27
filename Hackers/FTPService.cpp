@@ -108,6 +108,10 @@ list<File*> FTPService::getFiles() {
     return files;
 }
 
+void FTPService::randomInit() {
+    // TODO
+}
+
 FTPService::~FTPService() {
     for(File *file: files) {
         delete file;

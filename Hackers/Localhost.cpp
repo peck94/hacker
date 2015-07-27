@@ -15,6 +15,7 @@ Localhost::Localhost(): Host(new IP()) {
     ssh->addProgram(new Robber(1));
     ssh->addProgram(new Cracker(10));
     ssh->addProgram(new TransDeleter(5));
+    ssh->addProgram(new ScannerProgram());
     addService(ssh);
     
     FTPService *ftp = new FTPService(3);

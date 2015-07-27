@@ -101,6 +101,10 @@ void FinanceService::run(Host *host) {
     getShell()->run(host, "#");
 }
 
+void FinanceService::randomInit() {
+    // TODO
+}
+
 FinanceService::~FinanceService() {
     for(Transaction *t: transactions) {
         delete t;

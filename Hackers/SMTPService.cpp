@@ -122,3 +122,7 @@ void SMTPService::run(Host *host) {
     localhost = host;
     getShell()->run(host, ":");
 }
+
+void SMTPService::randomInit() {
+    // TODO
+}

@@ -18,6 +18,7 @@
 #include "Robber.h"
 #include "Cracker.h"
 #include "TransDeleter.h"
+#include "ScannerProgram.h"
 
 class Localhost: public Host {
 public:

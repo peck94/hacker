@@ -32,6 +32,7 @@ public:
     SSHService(unsigned int version);
     
     virtual void run(Host* host);
+    virtual void randomInit();
     
     void addProgram(Program *program);
     

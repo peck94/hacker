@@ -22,6 +22,7 @@
 		AB4C23841B66A8B20079C62B /* Cracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4C23821B66A8B20079C62B /* Cracker.cpp */; };
 		AB4C23871B66B02D0079C62B /* TransDeleter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4C23851B66B02D0079C62B /* TransDeleter.cpp */; };
 		AB4C238A1B66B41A0079C62B /* Internet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4C23881B66B41A0079C62B /* Internet.cpp */; };
+		AB4C238E1B66BEA60079C62B /* ScannerProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4C238C1B66BEA60079C62B /* ScannerProgram.cpp */; };
 		AB716CC11B6690510053EC49 /* SMTPService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CBF1B6690510053EC49 /* SMTPService.cpp */; };
 		AB716CC41B669B0D0053EC49 /* FinanceService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CC21B669B0D0053EC49 /* FinanceService.cpp */; };
 		AB716CC71B66A2060053EC49 /* Robber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CC51B66A2060053EC49 /* Robber.cpp */; };
@@ -71,6 +72,8 @@
 		AB4C23861B66B02D0079C62B /* TransDeleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransDeleter.h; sourceTree = "<group>"; };
 		AB4C23881B66B41A0079C62B /* Internet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Internet.cpp; sourceTree = "<group>"; };
 		AB4C23891B66B41A0079C62B /* Internet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Internet.h; sourceTree = "<group>"; };
+		AB4C238C1B66BEA60079C62B /* ScannerProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScannerProgram.cpp; sourceTree = "<group>"; };
+		AB4C238D1B66BEA60079C62B /* ScannerProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerProgram.h; sourceTree = "<group>"; };
 		AB716CBF1B6690510053EC49 /* SMTPService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SMTPService.cpp; sourceTree = "<group>"; };
 		AB716CC01B6690510053EC49 /* SMTPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTPService.h; sourceTree = "<group>"; };
 		AB716CC21B669B0D0053EC49 /* FinanceService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FinanceService.cpp; sourceTree = "<group>"; };
@@ -114,12 +117,10 @@
 				AB0196BB1B6579EC000A6F5A /* main.cpp */,
 				AB0196C51B657AEE000A6F5A /* IP.cpp */,
 				AB0196C61B657AEE000A6F5A /* IP.h */,
-				AB0196D41B6580AA000A6F5A /* Exploits */,
 				AB0196D31B65803C000A6F5A /* Vulnerabilities */,
 				AB0196E11B65A77E000A6F5A /* Shell.cpp */,
 				AB0196E21B65A77E000A6F5A /* Shell.h */,
-				AB09C9F51B65BA2600759DAE /* Program.cpp */,
-				AB09C9F61B65BA2600759DAE /* Program.h */,
+				AB4C238B1B66BE8E0079C62B /* Programs */,
 				AB4C23881B66B41A0079C62B /* Internet.cpp */,
 				AB4C23891B66B41A0079C62B /* Internet.h */,
 			);
@@ -181,6 +182,18 @@
 			name = Exploits;
 			sourceTree = "<group>";
 		};
+		AB4C238B1B66BE8E0079C62B /* Programs */ = {
+			isa = PBXGroup;
+			children = (
+				AB0196D41B6580AA000A6F5A /* Exploits */,
+				AB09C9F51B65BA2600759DAE /* Program.cpp */,
+				AB09C9F61B65BA2600759DAE /* Program.h */,
+				AB4C238C1B66BEA60079C62B /* ScannerProgram.cpp */,
+				AB4C238D1B66BEA60079C62B /* ScannerProgram.h */,
+			);
+			name = Programs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -238,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB716CC71B66A2060053EC49 /* Robber.cpp in Sources */,
+				AB4C238E1B66BEA60079C62B /* ScannerProgram.cpp in Sources */,
 				AB716CC41B669B0D0053EC49 /* FinanceService.cpp in Sources */,
 				AB4C238A1B66B41A0079C62B /* Internet.cpp in Sources */,
 				AB09C9F71B65BA2600759DAE /* Program.cpp in Sources */,

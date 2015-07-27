@@ -42,6 +42,7 @@ public:
     void recv(Email*);
     
     virtual void run(Host *host);
+    virtual void randomInit();
 };
 
 #endif /* defined(__Hackers__SMTPService__) */
