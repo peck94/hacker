@@ -116,7 +116,7 @@ void Shell::run(Host *host, string prompt) {
     while(line != "logout") {
         // get line
         if(authenticated) {
-            cout << session.first;
+            cout << session.first << "@" << host->getIP()->toString();
         }
         cout << prompt << " ";
         getline(cin, line);

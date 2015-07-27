@@ -19,7 +19,9 @@ SSHService::SSHService(unsigned int version): ShellService("SSH", 22, version) {
         cout << "login [username] [password]: login with the specified credentials" << endl;
         cout << "netstat: view active network connections" << endl;
         cout << "ping [ip]: check whether a host is up" << endl;
-        cout << "run [program] [args]: run a program" << endl;
+        cout << "logs: view logs" << endl;
+        cout << "newuser [username] [password]: create a new user" << endl;
+        cout << "passwd: change your password" << endl;
         cout << endl;
         cout << "The following programs are installed:" << endl;
         for(Program *program: programs) {

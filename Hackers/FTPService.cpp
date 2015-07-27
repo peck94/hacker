@@ -19,6 +19,11 @@ inline unsigned int max(unsigned int x, unsigned int y) {
 
 FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
     Shell* shell = getShell();
+    shell->add("help", [this] (vector<string> args) {
+        cout << "list: list all files" << endl;
+        cout << "upload [file] [host]: upload file to host" << endl;
+        cout << "delete [file]: delete a file" << endl;
+    }, false);
     shell->add("list", [this] (vector<string> args) {
         // list all files
         cout << setw(width) << "Filename ";

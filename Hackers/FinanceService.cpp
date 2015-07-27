@@ -10,6 +10,10 @@
 using namespace std;
 
 FinanceService::FinanceService(unsigned int version): ShellService("Finance", 8080, version) {
+    getShell()->add("help", [this] (vector<string> args) {
+        cout << "status: check your account" << endl;
+        cout << "transfer: transfer money to another account" << endl;
+    }, false);
     getShell()->add("status", [this] (vector<string> args) {
         // get account status
         string name = getShell()->getSession().first;

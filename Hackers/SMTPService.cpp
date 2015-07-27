@@ -10,6 +10,12 @@
 using namespace std;
 
 SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version) {
+    getShell()->add("help", [this] (vector<string> args) {
+        cout << "list: list e-mails for your account" << endl;
+        cout << "send: send an e-mail" << endl;
+        cout << "show [id]: show an e-mail" << endl;
+        cout << "delete [id]: delete an e-mail" << endl;
+    }, false);
     getShell()->add("list", [this] (vector<string> args) {
         // list emails
         string name = getShell()->getSession().first;
