@@ -21,3 +21,5 @@ string Program::getName() {
 unsigned int Program::getVersion() {
     return version;
 }
+
+Program::~Program() {}

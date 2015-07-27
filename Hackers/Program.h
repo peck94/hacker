@@ -32,6 +32,8 @@ public:
     
     // print docs
     virtual std::string help() = 0;
+    
+    virtual ~Program();
 };
 
 #endif /* defined(__Hackers__Program__) */
