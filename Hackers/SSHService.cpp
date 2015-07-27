@@ -23,7 +23,7 @@ SSHService::SSHService(unsigned int version): ShellService("SSH", 22, version) {
         cout << endl;
         cout << "The following programs are installed:" << endl;
         for(Program *program: programs) {
-            cout << program->getName() << endl;
+            cout << program->getName() << " v" << program->getVersion() << ": " << program->help() << endl;
         }
     }, false);
     shell->add("ssh", [this] (vector<string> args) {

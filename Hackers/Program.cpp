@@ -9,10 +9,15 @@
 #include "Program.h"
 using namespace std;
 
-Program::Program(string name) {
+Program::Program(string name, unsigned int version) {
     this->name = name;
+    this->version = version;
 }
 
 string Program::getName() {
     return name;
+}
+
+unsigned int Program::getVersion() {
+    return version;
 }

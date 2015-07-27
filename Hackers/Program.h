@@ -17,17 +17,20 @@ class Program {
 private:
     // store name (used in shell)
     std::string name;
+    // store version
+    unsigned int version;
     
 public:
-    Program(std::string name);
+    Program(std::string name, unsigned int version);
     
     // launch on host with args
     virtual void launch(Host *host, std::vector<std::string> args) = 0;
     
-    // return name
+    // getters
     std::string getName();
+    unsigned int getVersion();
     
-    // print help
+    // print docs
     virtual std::string help() = 0;
 };
 
