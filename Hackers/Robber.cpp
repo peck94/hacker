@@ -50,3 +50,7 @@ void Robber::run(Host *local, Host *remote, unsigned int port) {
         cout << "The exploit failed." << endl;
     }
 }
+
+string Robber::help() {
+    return "Transfer money between accounts on financial systems.";
+}

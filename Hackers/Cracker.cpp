@@ -30,3 +30,7 @@ void Cracker::run(Host *local, Host *remote, unsigned int port) {
     cout << "Username: " << itr->first << endl;
     cout << "Password: " << itr->second << endl;
 }
+
+string Cracker::help() {
+    return "Crack a login combination for a remote shell.";
+}

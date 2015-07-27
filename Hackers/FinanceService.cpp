@@ -88,6 +88,14 @@ bool FinanceService::hasAccount(string name) {
     return getShell()->hasUser(name);
 }
 
+void FinanceService::clearLog(string name) {
+    for(auto itr = transactions.begin(); itr != transactions.end(); itr++) {
+        if((*itr)->name == name) {
+            transactions.erase(itr);
+        }
+    }
+}
+
 void FinanceService::run(Host *host) {
     localhost = host;
     getShell()->run(host, "#");

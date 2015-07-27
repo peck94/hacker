@@ -21,3 +21,7 @@ void LogDeleter::run(Host *local, Host *remote, unsigned int port) {
         cout << "Unknown protocol." << endl;
     }
 }
+
+string LogDeleter::help() {
+    return "Delete logs of a remote shell.";
+}

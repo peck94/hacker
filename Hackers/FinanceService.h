@@ -43,6 +43,9 @@ public:
     // transfer money to account
     bool transfer(std::string name, int amount, std::string sender, std::string ip);
     
+    // clear some account's log
+    void clearLog(std::string name);
+    
     virtual void run(Host *host);
     
     ~FinanceService();

@@ -20,6 +20,7 @@
 		AB09C9FA1B65BC1000759DAE /* LogDeleter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB09C9F81B65BC1000759DAE /* LogDeleter.cpp */; };
 		AB09C9FD1B65BD6100759DAE /* ShellService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB09C9FB1B65BD6100759DAE /* ShellService.cpp */; };
 		AB4C23841B66A8B20079C62B /* Cracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4C23821B66A8B20079C62B /* Cracker.cpp */; };
+		AB4C23871B66B02D0079C62B /* TransDeleter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4C23851B66B02D0079C62B /* TransDeleter.cpp */; };
 		AB716CC11B6690510053EC49 /* SMTPService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CBF1B6690510053EC49 /* SMTPService.cpp */; };
 		AB716CC41B669B0D0053EC49 /* FinanceService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CC21B669B0D0053EC49 /* FinanceService.cpp */; };
 		AB716CC71B66A2060053EC49 /* Robber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CC51B66A2060053EC49 /* Robber.cpp */; };
@@ -65,6 +66,8 @@
 		AB09C9FC1B65BD6100759DAE /* ShellService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShellService.h; sourceTree = "<group>"; };
 		AB4C23821B66A8B20079C62B /* Cracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cracker.cpp; sourceTree = "<group>"; };
 		AB4C23831B66A8B20079C62B /* Cracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cracker.h; sourceTree = "<group>"; };
+		AB4C23851B66B02D0079C62B /* TransDeleter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransDeleter.cpp; sourceTree = "<group>"; };
+		AB4C23861B66B02D0079C62B /* TransDeleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransDeleter.h; sourceTree = "<group>"; };
 		AB716CBF1B6690510053EC49 /* SMTPService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SMTPService.cpp; sourceTree = "<group>"; };
 		AB716CC01B6690510053EC49 /* SMTPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTPService.h; sourceTree = "<group>"; };
 		AB716CC21B669B0D0053EC49 /* FinanceService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FinanceService.cpp; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				AB716CC61B66A2060053EC49 /* Robber.h */,
 				AB4C23821B66A8B20079C62B /* Cracker.cpp */,
 				AB4C23831B66A8B20079C62B /* Cracker.h */,
+				AB4C23851B66B02D0079C62B /* TransDeleter.cpp */,
+				AB4C23861B66B02D0079C62B /* TransDeleter.h */,
 			);
 			name = Exploits;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 				AB4C23841B66A8B20079C62B /* Cracker.cpp in Sources */,
 				AB716CC11B6690510053EC49 /* SMTPService.cpp in Sources */,
 				AB0196D71B658978000A6F5A /* SSHService.cpp in Sources */,
+				AB4C23871B66B02D0079C62B /* TransDeleter.cpp in Sources */,
 				AB0196E01B65A663000A6F5A /* FTPService.cpp in Sources */,
 				AB0196BC1B6579EC000A6F5A /* main.cpp in Sources */,
 				AB0196C41B657A0A000A6F5A /* Host.cpp in Sources */,

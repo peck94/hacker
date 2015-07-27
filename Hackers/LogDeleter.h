@@ -20,6 +20,8 @@ public:
     LogDeleter(unsigned int level);
     
     virtual void run(Host *local, Host *remote, unsigned int port);
+    
+    virtual std::string help();
 };
 
 #endif /* defined(__Hackers__LogDeleter__) */

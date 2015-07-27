@@ -10,6 +10,7 @@
 using namespace std;
 
 Shell::Shell() {
+    // default commands
     add("logout", [] (vector<string> args) {}, false);
     add("login", [this] (vector<string> args) {
         // check args
@@ -44,6 +45,43 @@ Shell::Shell() {
         for(LogEntry *entry: logs) {
             cout << left << setw(12) << entry->ip->toString();
             cout << entry->data << endl;
+        }
+    }, true);
+    add("passwd", [this] (vector<string> args) {
+        // change password of current user
+        string oldpass, newpass, newpass2;
+        string name = getSession().second;
+        
+        cout << "Changing password for " << name << ":" << endl;
+        cout << "Old password: ";
+        getline(cin, oldpass);
+        cout << "New password: ";
+        getline(cin, newpass);
+        cout << "Repeat password: ";
+        getline(cin, newpass2);
+        
+        if(getSession().second == oldpass &&
+           newpass == newpass2) {
+            addCredentials(name, newpass);
+            cout << "Password changed successfully." << endl;
+        }else{
+            cout << "An error occurred." << endl;
+        }
+    }, true);
+    add("newuser", [this] (vector<string> args) {
+        // create new user
+        if(args.size() < 3) {
+            cout << "Please specify name and password." << endl;
+            return;
+        }
+        
+        string name = args[1];
+        string pass = args[2];
+        if(hasUser(name)) {
+            cout << "User already exists." << endl;
+        }else{
+            addCredentials(name, pass);
+            cout << "New user " << name << " created." << endl;
         }
     }, true);
 }

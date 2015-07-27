@@ -17,6 +17,7 @@
 #include "FinanceService.h"
 #include "Robber.h"
 #include "Cracker.h"
+#include "TransDeleter.h"
 
 class Localhost: public Host {
 public:
