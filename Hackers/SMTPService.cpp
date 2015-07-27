@@ -126,3 +126,11 @@ void SMTPService::run(Host *host) {
 void SMTPService::randomInit() {
     // TODO
 }
+
+SMTPService::~SMTPService() {
+    for(pair<string, vector<Email*>> p: emails) {
+        for(Email* email: p.second) {
+            delete email;
+        }
+    }
+}

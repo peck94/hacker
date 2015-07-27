@@ -12,6 +12,8 @@
 #include <map>
 #include <vector>
 #include <functional>
+#include <fstream>
+#include "Person.h"
 #include "Host.h"
 #include "Localhost.h"
 #include "SSHService.h"
@@ -26,8 +28,8 @@ typedef std::function<Service*(unsigned int)> factory;
  */
 class Internet {
 private:
-    // store hosts
-    std::map<std::string, Host*> hosts;
+    // store people
+    std::map<std::string, Person*> people;
     // store service factories
     std::vector<factory> services;
     // store max version
@@ -36,16 +38,22 @@ private:
     unsigned int size;
     // store localhost
     Host *localhost;
+    // store resources
+    std::vector<std::string> usernames;
+    std::vector<std::string> passwords;
 
     // generate random service
     Service* randomService();
     
     // generate random host
     Host* randomHost();
+    
+    // generate random person
+    Person* randomPerson(Host *host);
 
 public:
-    // init with size and max program version
-    Internet(unsigned int size, unsigned int maxVersion);
+    // init
+    Internet(unsigned int size, unsigned int maxVersion, std::string username, std::string password);
     
     // create the network
     void generate();

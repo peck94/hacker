@@ -43,6 +43,8 @@ public:
     
     virtual void run(Host *host);
     virtual void randomInit();
+    
+    ~SMTPService();
 };
 
 #endif /* defined(__Hackers__SMTPService__) */

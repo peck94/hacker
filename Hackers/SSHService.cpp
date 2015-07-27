@@ -68,18 +68,16 @@ SSHService::SSHService(unsigned int version): ShellService("SSH", 22, version) {
             cout << args[1] << " is unreachable." << endl;
         }
     }, true);
-    shell->add("run", [this] (vector<string> args) {
-        if(args.size() < 2) {
-            cout << "Please specify an executable." << endl;
-            return;
-        }
-        
-        string name = args[1];
+    shell->add("*", [this] (vector<string> args) {
+        string name = args[0];
         for(Program *program: programs) {
             if(program->getName() == name) {
                 program->launch(localhost, args);
+                return;
             }
         }
+        
+        cout << "Unknown command: " << name << endl;
     }, true);
 }
 

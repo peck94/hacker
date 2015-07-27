@@ -11,6 +11,9 @@ using namespace std;
 
 Shell::Shell() {
     // default commands
+    add("*", [] (vector<string> args) {
+        cout << "Unknown command: " << args[0] << endl;
+    }, false);
     add("logout", [] (vector<string> args) {}, false);
     add("login", [this] (vector<string> args) {
         // check args
@@ -135,7 +138,7 @@ void Shell::run(Host *host, string prompt) {
         
         // run command if exists
         if(cmds.find(args[0]) == cmds.end()) {
-            cout << "Unknown command: " << args[0] << endl;
+            cmds["*"](args);
         }else{
             cmds[args[0]](args);
         }

@@ -12,8 +12,20 @@ using namespace std;
 ScannerProgram::ScannerProgram(): Program("nmap", 3) {}
 
 void ScannerProgram::launch(Host *host, vector<string> args) {
-    cout << "Services detected on " << host->getIP()->toString() << ":" << endl;
-    for(pair<unsigned int, Service*> p: host->getServices()) {
+    if(args.size() < 2) {
+        cout << "Please specify a remote host." << endl;
+        return;
+    }
+    
+    string ip = args[1];
+    if(!host->ping(ip)) {
+        cout << "Destination host unreachable." << endl;
+        return;
+    }
+    
+    Host *remote = host->resolve(ip);
+    cout << "Services detected on " << remote->getIP()->toString() << ":" << endl;
+    for(pair<unsigned int, Service*> p: remote->getServices()) {
         cout << p.first << ": " << p.second->printBanner() << endl;
     }
 }
