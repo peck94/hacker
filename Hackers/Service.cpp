@@ -42,3 +42,5 @@ void Service::addVuln(Vulnerability vuln) {
 bool Service::isVuln(Vulnerability code) {
     return vulns.find(code) != vulns.end();
 }
+
+Service::~Service() {}

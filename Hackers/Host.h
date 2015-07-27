@@ -14,7 +14,7 @@
 #include <map>
 #include <memory>
 #include <iostream>
-#include <vector>
+#include <set>
 
 class Service;
 
@@ -29,7 +29,7 @@ private:
     // store services
     std::map<unsigned int, Service*> services;
     // store neighbors
-    std::vector<Host*> uplinks;
+    std::set<Host*> uplinks;
     
 public:
     // init with IP
@@ -63,7 +63,10 @@ public:
     void link(Host* host);
     
     // get links
-    std::vector<Host*> getLinks();
+    std::set<Host*> getLinks();
+    
+    // check link
+    bool hasLink(Host *host);
     
     // dtor
     virtual ~Host();

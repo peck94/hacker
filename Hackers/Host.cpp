@@ -104,11 +104,15 @@ Host* Host::resolve(string ip) {
 }
 
 void Host::link(Host* host) {
-    uplinks.push_back(host);
+    uplinks.insert(host);
 }
 
-vector<Host*> Host::getLinks() {
+set<Host*> Host::getLinks() {
     return uplinks;
+}
+
+bool Host::hasLink(Host *host) {
+    return uplinks.find(host) != uplinks.end();
 }
 
 Host::~Host() {

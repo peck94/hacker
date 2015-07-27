@@ -51,6 +51,11 @@ public:
     
     // run the service
     virtual void run(Host* host) = 0;
+    
+    // init the serice with random data
+    virtual void randomInit() = 0;
+    
+    virtual ~Service();
 };
 
 #endif /* defined(__Hackers__Service__) */
