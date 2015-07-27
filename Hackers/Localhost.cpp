@@ -12,6 +12,7 @@ using namespace std;
 Localhost::Localhost(): Host(new IP()) {
     SSHService *ssh = new SSHService(2);
     ssh->addProgram(new LogDeleter(2));
+    ssh->addProgram(new Robber(1));
     ssh->addVuln(LOG_DELETER);
     addService(ssh);
     
@@ -27,5 +28,6 @@ Localhost::Localhost(): Host(new IP()) {
     FinanceService *f = new FinanceService(1);
     f->addAccount("smtp", "smtp", 100);
     f->addAccount("admin", "admin", 50);
+    f->addVuln(THEFT);
     addService(f);
 }

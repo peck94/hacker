@@ -59,8 +59,12 @@ FinanceService::FinanceService(unsigned int version): ShellService("Finance", 80
             return;
         }
         
-        f->transfer(remotename, amount, localname, localip);
-        accounts[localname]-= amount;
+        if(f->transfer(remotename, amount, localname, localip)) {
+            transfer(localname, -amount, remotename, ip);
+            cout << "The transfer was ACCEPTED." << endl;
+        }else{
+            cout << "The transfer was REJECTED." << endl;
+        }
     }, true);
 }
 
