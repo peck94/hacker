@@ -115,6 +115,10 @@ bool Host::hasLink(Host *host) {
     return uplinks.find(host) != uplinks.end();
 }
 
+map<unsigned int, Service*> Host::getServices() {
+    return services;
+}
+
 Host::~Host() {
     delete ip;
     for(pair<unsigned int, Service*> p: services) {

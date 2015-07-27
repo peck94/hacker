@@ -10,6 +10,7 @@
 #define __Hackers__ScannerProgram__
 
 #include "Program.h"
+#include "Service.h"
 #include <string>
 
 class ScannerProgram: public Program {

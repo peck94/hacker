@@ -44,6 +44,9 @@ public:
     // check service
     bool hasService(unsigned int port);
     
+    // get services
+    std::map<unsigned int, Service*> getServices();
+    
     // connect to a service
     void connect(unsigned int port);
     

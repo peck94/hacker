@@ -12,7 +12,10 @@ using namespace std;
 ScannerProgram::ScannerProgram(): Program("nmap", 3) {}
 
 void ScannerProgram::launch(Host *host, vector<string> args) {
-    
+    cout << "Services detected on " << host->getIP()->toString() << ":" << endl;
+    for(pair<unsigned int, Service*> p: host->getServices()) {
+        cout << p.first << ": " << p.second->printBanner() << endl;
+    }
 }
 
 string ScannerProgram::help() {
