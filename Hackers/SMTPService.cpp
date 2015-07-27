@@ -89,6 +89,25 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
         cout << "Subject: " << email->subject << endl;
         cout << email->body << endl;
     }, true);
+    getShell()->add("delete", [this] (vector<string> args) {
+        if(args.size() < 2) {
+            cout << "Please specify a number." << endl;
+            return;
+        }
+        
+        int index = stoi(args[1])-1;
+        string name = getShell()->getSession().first;
+        if(emails.find(name) == emails.end() || emails[name].size() <= index) {
+            cout << "No such e-mail." << endl;
+            return;
+        }
+        
+        Email *email = emails[name][index];
+        swap(emails[name][index], emails[name].back());
+        emails[name].pop_back();
+        delete email;
+        cout << "Message " << index+1 << " erased." << endl;
+    }, true);
 }
 
 void SMTPService::recv(Email *email) {
