@@ -13,11 +13,10 @@ Localhost::Localhost(): Host(new IP()) {
     SSHService *ssh = new SSHService(2);
     ssh->addProgram(new LogDeleter(2));
     ssh->addProgram(new Robber(1));
-    ssh->addVuln(LOG_DELETER);
+    ssh->addProgram(new Cracker(10));
     addService(ssh);
     
     FTPService *ftp = new FTPService(3);
-    ftp->addVuln(LOG_DELETER);
     ftp->upload(new File{"motd", 1337});
     addService(ftp);
     

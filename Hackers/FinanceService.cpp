@@ -85,7 +85,7 @@ bool FinanceService::transfer(string name, int amount, string sender, string ip)
 }
 
 bool FinanceService::hasAccount(string name) {
-    return accounts.find(name) != accounts.end();
+    return getShell()->hasUser(name);
 }
 
 void FinanceService::run(Host *host) {

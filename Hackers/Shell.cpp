@@ -32,18 +32,12 @@ Shell::Shell() {
         }
         
         // check them
-        for(pair<string, string> p: creds) {
-            if(username == p.first && password == p.second) {
-                authenticated = true;
-                session = p;
-                break;
-            }
-        }
-        
-        if(!authenticated) {
-            cout << "Invalid login credentials." << endl;
-        }else{
+        if(hasUser(username) && creds[username] == password) {
+            authenticated = true;
+            session = pair<string, string>{username, password};
             cout << "Logged in as " << username << "." << endl;
+        }else{
+            cout << "Invalid login credentials." << endl;
         }
     }, false);
     add("logs", [this] (vector<string> args) {
@@ -111,20 +105,17 @@ void Shell::run(Host *host, string prompt) {
     
     // log shell exit
     addLog("[Disconnected]");
+    
+    // logout
+    authenticated = false;
 }
 
 void Shell::addCredentials(string username, string password) {
-    creds.push_back(pair<string, string>{username, password});
+    creds[username] = password;
 }
 
 bool Shell::hasUser(string user) {
-    for(pair<string, string> c: creds) {
-        if(c.first == user) {
-            return true;
-        }
-    }
-    
-    return false;
+    return creds.find(user) != creds.end();
 }
 
 void Shell::addLog(string entry) {
@@ -137,6 +128,10 @@ void Shell::clearLogs() {
 
 pair<string, string> Shell::getSession() {
     return session;
+}
+
+map<string, string> Shell::getCredentials() {
+    return creds;
 }
 
 Shell::~Shell() {

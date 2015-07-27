@@ -12,13 +12,16 @@ using namespace std;
 Robber::Robber(unsigned int level): Exploit("rob", THEFT, level) {}
 
 void Robber::run(Host *local, Host *remote, unsigned int port) {
-    if(!local->hasService(port)) {
+    FinanceService *fl = dynamic_cast<FinanceService*>(remote->getService(port));
+    if(!fl) {
         cout << "No local finance service running." << endl;
         return;
     }
-    
-    FinanceService *fl = static_cast<FinanceService*>(remote->getService(port));
-    FinanceService *fr = static_cast<FinanceService*>(local->getService(port));
+    FinanceService *fr = dynamic_cast<FinanceService*>(local->getService(port));
+    if(!fr) {
+        cout << "No remote finance service running." << endl;
+        return;
+    }
     
     string victim, other;
     int amount;

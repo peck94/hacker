@@ -36,7 +36,7 @@ private:
      * Stores login credentials.
      * Services with no credentials are assumed to allow anonymous login.
      */
-    std::vector<std::pair<std::string, std::string>> creds;
+    std::map<std::string, std::string> creds;
     // store auth status
     bool authenticated = false;
     // store session
@@ -55,6 +55,9 @@ public:
     // register credentials
     void addCredentials(std::string username, std::string password);
     
+    // get credentials
+    std::map<std::string, std::string> getCredentials();
+    
     // check credentials
     bool hasUser(std::string user);
     
@@ -68,7 +71,7 @@ public:
     // clear logs
     void clearLogs();
     
-    // getters
+    // get session
     std::pair<std::string, std::string> getSession();
     
     ~Shell();

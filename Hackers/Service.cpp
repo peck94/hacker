@@ -13,6 +13,10 @@ Service::Service(string name, unsigned int port, unsigned int version) {
     this->name = name;
     this->port = port;
     this->version = version;
+    
+    // every service has at least these vulns
+    addVuln(CRACK);
+    addVuln(LOG_DELETER);
 }
 
 string Service::getName() {

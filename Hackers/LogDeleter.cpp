@@ -7,11 +7,17 @@
 //
 
 #include "LogDeleter.h"
+using namespace std;
 
 LogDeleter::LogDeleter(unsigned int level): Exploit("logdel", LOG_DELETER, level) {}
 
 void LogDeleter::run(Host *local, Host *remote, unsigned int port) {
-    ShellService *s = static_cast<ShellService*>(remote->getService(port));
-    Shell *shell = s->getShell();
-    shell->clearLogs();
+    ShellService *s = dynamic_cast<ShellService*>(remote->getService(port));
+    if(s) {
+        Shell *shell = s->getShell();
+        shell->clearLogs();
+        cout << "Logs cleared." << endl;
+    }else{
+        cout << "Unknown protocol." << endl;
+    }
 }
