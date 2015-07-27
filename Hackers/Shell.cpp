@@ -86,6 +86,10 @@ void Shell::run(Host *host, string prompt) {
         cout << prompt << " ";
         getline(cin, line);
         
+        if(line.length() == 0) {
+            continue;
+        }
+        
         // log command
         addLog(line);
         

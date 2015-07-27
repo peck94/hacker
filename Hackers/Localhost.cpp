@@ -23,4 +23,9 @@ Localhost::Localhost(): Host(new IP()) {
     SMTPService *smtp = new SMTPService(6);
     smtp->getShell()->addCredentials("smtp", "smtp");
     addService(smtp);
+    
+    FinanceService *f = new FinanceService(1);
+    f->addAccount("smtp", "smtp", 100);
+    f->addAccount("admin", "admin", 50);
+    addService(f);
 }

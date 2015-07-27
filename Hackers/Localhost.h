@@ -14,6 +14,7 @@
 #include "FTPService.h"
 #include "LogDeleter.h"
 #include "SMTPService.h"
+#include "FinanceService.h"
 
 class Localhost: public Host {
 public:
