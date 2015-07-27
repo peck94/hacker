@@ -20,6 +20,7 @@
 #include "FTPService.h"
 #include "SMTPService.h"
 #include "FinanceService.h"
+#include "ResourceGenerator.h"
 
 typedef std::function<Service*(unsigned int)> factory;
 
@@ -38,9 +39,8 @@ private:
     unsigned int size;
     // store localhost
     Host *localhost;
-    // store resources
-    std::vector<std::string> usernames;
-    std::vector<std::string> passwords;
+    // store resource generator
+    ResourceGenerator *gen;
 
     // generate random service
     Service* randomService();
@@ -53,7 +53,7 @@ private:
 
 public:
     // init
-    Internet(unsigned int size, unsigned int maxVersion, std::string username, std::string password);
+    Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVersion, std::string username, std::string password);
     
     // create the network
     void generate();

@@ -113,7 +113,7 @@ list<File*> FTPService::getFiles() {
     return files;
 }
 
-void FTPService::randomInit() {
+void FTPService::randomInit(ResourceGenerator *gen) {
     // TODO
 }
 

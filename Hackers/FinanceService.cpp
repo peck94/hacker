@@ -105,7 +105,7 @@ void FinanceService::run(Host *host) {
     getShell()->run(host, "#");
 }
 
-void FinanceService::randomInit() {
+void FinanceService::randomInit(ResourceGenerator *gen) {
     // TODO
 }
 

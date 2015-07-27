@@ -9,7 +9,8 @@
 #include "Internet.h"
 using namespace std;
 
-Internet::Internet(unsigned int size, unsigned int maxVersion, string username, string password) {
+Internet::Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVersion, string username, string password) {
+    this->gen = gen;
     this->maxVersion = maxVersion;
     this->size = size;
 
@@ -17,31 +18,6 @@ Internet::Internet(unsigned int size, unsigned int maxVersion, string username, 
     localhost = new Localhost();
     Person *player = new Person(localhost, username, password);
     people[localhost->getIP()->toString()] = player;
-    
-    // load usernames
-    ifstream file("resources/usernames.txt", ios_base::in);
-    if(!file.is_open()) {
-        cerr << "Unable to load usernames." << endl;
-    }else{
-        while(!file.eof()) {
-            string line;
-            getline(file, line);
-            usernames.push_back(line);
-        }
-        file.close();
-    }
-    // load passwords
-    ifstream file2("resources/passwords.txt", ios_base::in);
-    if(!file2.is_open()) {
-        cerr << "Unable to load passwords." << endl;
-    }else{
-        while(!file2.eof()) {
-            string line;
-            getline(file2, line);
-            passwords.push_back(line);
-        }
-        file.close();
-    }
     
     // register services
     registerService([] (unsigned int version) -> Service* {
@@ -106,7 +82,7 @@ Host* Internet::randomHost() {
         while(true) {
             Service *s = randomService();
             if(!host->hasService(s->getPort())) {
-                s->randomInit();
+                s->randomInit(gen);
                 host->addService(s);
                 break;
             }else{
@@ -128,8 +104,8 @@ Service* Internet::randomService() {
 }
 
 Person* Internet::randomPerson(Host *host) {
-    string username = usernames[rand() % usernames.size()];
-    string password = passwords[rand() % passwords.size()];
+    string username = gen->randomName();
+    string password = gen->randomPassword();
     
     return new Person(host, username, password);
 }

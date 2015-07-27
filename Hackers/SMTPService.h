@@ -42,7 +42,7 @@ public:
     void recv(Email*);
     
     virtual void run(Host *host);
-    virtual void randomInit();
+    virtual void randomInit(ResourceGenerator *gen);
     
     ~SMTPService();
 };

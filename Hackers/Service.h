@@ -14,6 +14,7 @@
 #include <memory>
 #include "Vulnerability.h"
 #include "Host.h"
+#include "ResourceGenerator.h"
 
 class Host;
 
@@ -53,7 +54,7 @@ public:
     virtual void run(Host* host) = 0;
     
     // init the serice with random data
-    virtual void randomInit() = 0;
+    virtual void randomInit(ResourceGenerator *gen) = 0;
     
     virtual ~Service();
 };

@@ -90,7 +90,7 @@ void SSHService::run(Host* host) {
     getShell()->run(host, "$");
 }
 
-void SSHService::randomInit() {
+void SSHService::randomInit(ResourceGenerator *gen) {
     // TODO
 }
 

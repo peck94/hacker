@@ -129,7 +129,7 @@ void SMTPService::run(Host *host) {
     getShell()->run(host, ":");
 }
 
-void SMTPService::randomInit() {
+void SMTPService::randomInit(ResourceGenerator *gen) {
     // TODO
 }
 

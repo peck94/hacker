@@ -21,11 +21,13 @@ int main(int argc, const char * argv[]) {
     getline(cin, pass);
     
     cout << "Loading..." << endl;
-    Internet *internet = new Internet(256, 10, user, pass);
+    ResourceGenerator *gen = new ResourceGenerator();
+    Internet *internet = new Internet(gen, 256, 10, user, pass);
     internet->generate();
     cout << endl;
     internet->getLocalhost()->connect(22);
     
     delete internet;
+    delete gen;
     return 0;
 }
