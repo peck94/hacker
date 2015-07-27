@@ -61,7 +61,7 @@ string ResourceGenerator::randomContents(string path, unsigned int count) {
         string line;
         getline(file, line);
         
-        contents = line + "\n";
+        contents+= line + "\n";
     }
     file.close();
     

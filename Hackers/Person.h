@@ -12,6 +12,10 @@
 #include "Host.h"
 #include "Service.h"
 #include "ShellService.h"
+#include "Internet.h"
+#include "ResourceGenerator.h"
+
+class Internet;
 
 /*
  * Represents a person. People own hosts and do stuff with them.
@@ -34,7 +38,10 @@ public:
     std::string getName();
     std::string getPassword();
     
-    ~Person();
+    // AI
+    virtual void animate(ResourceGenerator *gen, Internet *internet);
+    
+    virtual ~Person();
 };
 
 #endif /* defined(__Hackers__Person__) */

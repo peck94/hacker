@@ -23,6 +23,7 @@ FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
         cout << "list: list all files" << endl;
         cout << "upload [file] [host]: upload file to host" << endl;
         cout << "delete [file]: delete a file" << endl;
+        cout << "cat [file]: display file contents" << endl;
     }, false);
     shell->add("list", [this] (vector<string> args) {
         // list all files
@@ -30,7 +31,7 @@ FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
         cout << "Size" << endl;
         for(File *file: files) {
             cout << left << setw(width) << file->name;
-            cout << file->size << "b" << endl;
+            cout << file->contents.length() << "b" << endl;
         }
     }, true);
     shell->add("upload", [this] (vector<string> args) {
@@ -46,7 +47,7 @@ FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
         File *file = nullptr;
         for(File *f: files) {
             if(f->name == filename) {
-                file = new File{f->name, f->size};
+                file = new File{f->name, f->contents};
                 break;
             }
         }
@@ -94,6 +95,22 @@ FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
         
         cout << "File not found." << endl;
     }, true);
+    shell->add("cat", [this] (vector<string> args) {
+        if(args.size() < 2) {
+            cout << "Please specify a file name." << endl;
+            return;
+        }
+        
+        string name = args[1];
+        for(File *file: files) {
+            if(file->name == name) {
+                cout << file->contents << endl;
+                return;
+            }
+        }
+        
+        cout << "File not found." << endl;
+    }, true);
 }
 
 void FTPService::run(Host *host) {
@@ -114,7 +131,11 @@ list<File*> FTPService::getFiles() {
 }
 
 void FTPService::randomInit(ResourceGenerator *gen) {
-    // TODO
+    // add random files
+    unsigned int count = rand() % 10;
+    for(unsigned int i = 0; i < count; i++) {
+        upload(new File{"file-" + to_string(i), gen->randomFile()});
+    }
 }
 
 FTPService::~FTPService() {

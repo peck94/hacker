@@ -7,6 +7,7 @@
 //
 
 #include "Person.h"
+#include "Internet.h"
 using namespace std;
 
 Person::Person(Host *host, string name, string password) {
@@ -34,6 +35,10 @@ string Person::getPassword() {
 
 Host* Person::getHost() {
     return host;
+}
+
+void Person::animate(ResourceGenerator *gen, Internet *internet) {
+    // TODO
 }
 
 Person::~Person() {

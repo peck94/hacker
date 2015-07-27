@@ -24,6 +24,7 @@ int main(int argc, const char * argv[]) {
     ResourceGenerator *gen = new ResourceGenerator();
     Internet *internet = new Internet(gen, 256, 10, user, pass);
     internet->generate();
+    internet->start();
     cout << endl;
     internet->getLocalhost()->connect(22);
     

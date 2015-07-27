@@ -13,6 +13,7 @@
 #include <vector>
 #include <functional>
 #include <fstream>
+#include <thread>
 #include "Person.h"
 #include "Host.h"
 #include "Localhost.h"
@@ -23,6 +24,8 @@
 #include "ResourceGenerator.h"
 
 typedef std::function<Service*(unsigned int)> factory;
+
+class Person;
 
 /*
  * The internet consists of a random assortment of hosts interconnected with each other, all running various services of differing versions.
@@ -41,6 +44,10 @@ private:
     Host *localhost;
     // store resource generator
     ResourceGenerator *gen;
+    // store thread flag
+    bool active;
+    // store AI thread
+    std::thread aiThread;
 
     // generate random service
     Service* randomService();
@@ -58,11 +65,20 @@ public:
     // create the network
     void generate();
     
+    // start the AI
+    void start();
+    
+    // stop the AI
+    void stop();
+    
     // register a service
     void registerService(factory f);
     
     // get local host
     Host* getLocalhost();
+    
+    // AI
+    void animate();
     
     ~Internet();
 };

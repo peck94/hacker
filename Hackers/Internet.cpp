@@ -7,6 +7,7 @@
 //
 
 #include "Internet.h"
+#include "Person.h"
 using namespace std;
 
 Internet::Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVersion, string username, string password) {
@@ -118,7 +119,27 @@ Host* Internet::getLocalhost() {
     return localhost;
 }
 
+void Internet::start() {
+    active = true;
+    aiThread = thread(&Internet::animate, this);
+}
+
+void Internet::stop() {
+    active = false;
+    aiThread.join();
+}
+
+void Internet::animate() {
+    while(active) {
+        for(pair<string, Person*> p: people) {
+            Person *person = p.second;
+            person->animate(gen, this);
+        }
+    }
+}
+
 Internet::~Internet() {
+    stop();
     for(pair<string, Person*> p: people) {
         delete p.second;
     }

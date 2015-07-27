@@ -16,7 +16,7 @@
 
 struct File {
     std::string name;
-    unsigned int size;
+    std::string contents;
 };
 
 /*
