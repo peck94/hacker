@@ -21,6 +21,7 @@ private:
     // store resources
     std::vector<std::string> usernames;
     std::vector<std::string> passwords;
+    std::vector<std::string> subjects;
     unsigned int num_emails;
     unsigned int num_files;
     // store cache
@@ -36,6 +37,7 @@ public:
     std::string randomName();
     std::string randomPassword();
     std::string randomEmail();
+    std::string randomSubject();
     std::string randomFile();
 };
 

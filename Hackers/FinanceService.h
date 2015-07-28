@@ -40,6 +40,9 @@ public:
     // check account
     bool hasAccount(std::string name);
     
+    // get balance
+    int getAccount(std::string name);
+    
     // transfer money to account
     bool transfer(std::string name, int amount, std::string sender, std::string ip);
     

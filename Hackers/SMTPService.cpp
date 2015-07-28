@@ -122,6 +122,11 @@ void SMTPService::recv(Email *email) {
     }else{
         emails[email->nameTarget].push_back(email);
     }
+    
+    // notify addressed to us
+    if(email->nameTarget == getShell()->getSession().first) {
+        cout << "New e-mail from " << email->nameSource << "@" << email->ipSender << "!" << endl;
+    }
 }
 
 void SMTPService::run(Host *host) {

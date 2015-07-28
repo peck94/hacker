@@ -77,6 +77,9 @@ public:
     // get local host
     Host* getLocalhost();
     
+    // get random person
+    Person* getRandomPerson();
+    
     // AI
     void animate();
     

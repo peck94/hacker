@@ -10,11 +10,10 @@
 using namespace std;
 
 ResourceGenerator::ResourceGenerator() {
-    // load usernames
+    // load resources
     loadFile("resources/usernames.txt", usernames);
-    
-    // load passwords
     loadFile("resources/passwords.txt", passwords);
+    loadFile("resources/subjects.txt", subjects);
     
     // set counts
     this->num_emails = 1097;
@@ -76,6 +75,10 @@ string ResourceGenerator::randomName() {
 
 string ResourceGenerator::randomPassword() {
     return randomString(passwords);
+}
+
+string ResourceGenerator::randomSubject() {
+    return randomString(subjects);
 }
 
 string ResourceGenerator::randomEmail() {

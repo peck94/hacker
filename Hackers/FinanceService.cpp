@@ -100,6 +100,10 @@ void FinanceService::clearLog(string name) {
     }
 }
 
+int FinanceService::getAccount(string name) {
+    return accounts[name];
+}
+
 void FinanceService::run(Host *host) {
     localhost = host;
     getShell()->run(host, "#");

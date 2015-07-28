@@ -134,8 +134,19 @@ void Internet::animate() {
         for(pair<string, Person*> p: people) {
             Person *person = p.second;
             person->animate(gen, this);
+            this_thread::sleep_for(chrono::milliseconds(500));
+            
+            if(!active) {
+                break;
+            }
         }
     }
+}
+
+Person* Internet::getRandomPerson() {
+    auto itr = people.begin();
+    advance(itr, rand() % people.size());
+    return itr->second;
 }
 
 Internet::~Internet() {
