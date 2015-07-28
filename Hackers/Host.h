@@ -31,6 +31,8 @@ private:
     std::map<unsigned int, Service*> services;
     // store neighbors
     std::set<Host*> uplinks;
+    // store DNS cache
+    std::map<std::string, Host*> cache;
     
 public:
     // init with IP
@@ -61,7 +63,7 @@ public:
     bool ping(std::string ip);
     
     // get host
-    Host* resolve(std::string ip);
+    Host* resolve(std::string ip, Host *source = nullptr);
     
     // add host to network
     void link(Host* host);

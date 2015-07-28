@@ -21,8 +21,13 @@ int main(int argc, const char * argv[]) {
     getline(cin, pass);
     
     cout << "Loading..." << endl;
-    ResourceGenerator *gen = new ResourceGenerator(10);
-    Internet *internet = new Internet(gen, 10, 10, 10, user, pass);
+    
+    unsigned int size = 256;
+    unsigned int maxVersion = 10;
+    unsigned int maxUsers = 10;
+    ResourceGenerator *gen = new ResourceGenerator(maxVersion);
+
+    Internet *internet = new Internet(gen, size, maxVersion, maxUsers, user, pass);
     internet->generate();
     internet->start();
     cout << endl;

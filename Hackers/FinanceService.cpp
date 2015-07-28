@@ -110,7 +110,7 @@ void FinanceService::run(Host *host) {
 }
 
 void FinanceService::randomInit(ResourceGenerator *gen) {
-    // TODO
+    // not needed
 }
 
 void FinanceService::getHacked(Person *person) {

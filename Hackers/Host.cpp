@@ -78,23 +78,36 @@ bool Host::ping(string ip) {
     return false;
 }
 
-Host* Host::resolve(string ip) {
+Host* Host::resolve(string ip, Host *source) {
     // check own ip
     if(ip == getIP()->toString()) {
         return this;
     }
     
+    // check cache
+    if(cache.find(ip) != cache.end()) {
+        return cache[ip];
+    }
+    
     // find IP locally
     for(Host* host: uplinks) {
         if(host->getIP()->toString() == ip) {
+            cache[ip] = host;
             return host;
         }
     }
     
     // contact uplinks
     for(Host* host: uplinks) {
-        Host* result = host->resolve(ip);
+        // prevent loops
+        if(source && host->getIP()->toString() == source->getIP()->toString()) {
+            continue;
+        }
+        
+        // contact neighbor
+        Host* result = host->resolve(ip, this);
         if(result) {
+            cache[ip] = result;
             return result;
         }
     }
@@ -105,6 +118,9 @@ Host* Host::resolve(string ip) {
 
 void Host::link(Host* host) {
     uplinks.insert(host);
+    if(!host->hasLink(this)) {
+        host->link(this);
+    }
 }
 
 set<Host*> Host::getLinks() {
@@ -112,7 +128,13 @@ set<Host*> Host::getLinks() {
 }
 
 bool Host::hasLink(Host *host) {
-    return uplinks.find(host) != uplinks.end();
+    for(Host *other: uplinks) {
+        if(other->getIP()->toString() == host->getIP()->toString()) {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 map<unsigned int, Service*> Host::getServices() {
