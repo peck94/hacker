@@ -71,6 +71,9 @@ public:
     // clear logs
     void clearLogs();
     
+    // check session
+    bool isAuthenticated();
+    
     // get session
     std::pair<std::string, std::string> getSession();
     

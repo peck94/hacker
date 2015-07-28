@@ -167,6 +167,10 @@ void Shell::addLog(IP* ip, string entry) {
     logs.push_back(new LogEntry{ip, entry});
 }
 
+bool Shell::isAuthenticated() {
+    return authenticated;
+}
+
 void Shell::clearLogs() {
     logs.clear();
 }

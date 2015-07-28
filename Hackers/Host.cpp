@@ -55,30 +55,10 @@ IP* Host::getIP() {
 }
 
 bool Host::ping(string ip) {
-    // check own IP
-    if(ip == getIP()->toString()) {
-        return true;
-    }
-    
-    // find IP locally
-    for(Host* host: uplinks) {
-        if(host->getIP()->toString() == ip) {
-            return true;
-        }
-    }
-    
-    // contact uplinks
-    for(Host* host: uplinks) {
-        if(host->ping(ip)) {
-            return true;
-        }
-    }
-    
-    // nothing found
-    return false;
+    return resolve(ip);
 }
 
-Host* Host::resolve(string ip, Host *source) {
+Host* Host::resolve(string ip, set<string> record) {
     // check own ip
     if(ip == getIP()->toString()) {
         return this;
@@ -100,12 +80,13 @@ Host* Host::resolve(string ip, Host *source) {
     // contact uplinks
     for(Host* host: uplinks) {
         // prevent loops
-        if(source && host->getIP()->toString() == source->getIP()->toString()) {
+        if(record.find(host->getIP()->toString()) != record.end()) {
             continue;
         }
         
         // contact neighbor
-        Host* result = host->resolve(ip, this);
+        record.insert(getIP()->toString());
+        Host* result = host->resolve(ip, record);
         if(result) {
             cache[ip] = result;
             return result;

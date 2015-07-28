@@ -123,8 +123,8 @@ void SMTPService::recv(Email *email) {
         emails[email->nameTarget].push_back(email);
     }
     
-    // notify addressed to us
-    if(email->nameTarget == getShell()->getSession().first) {
+    // notify if addressed to us
+    if(email->nameTarget == getShell()->getSession().first && getShell()->isAuthenticated()) {
         cout << "New e-mail from " << email->nameSource << "@" << email->ipSender << "!" << endl;
     }
 }

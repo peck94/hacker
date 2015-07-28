@@ -48,30 +48,33 @@ Host* Person::getHost() {
 void Person::animate(ResourceGenerator *gen, Internet *internet) {
     Host *host = getHost();
     this->generator = gen;
-
-    // attempt to hack somebody's system
-    if(!host->hasService(22)) {
-        // we can't hack
-        return;
-    }
-    
-    SSHService *ssh = static_cast<SSHService*>(host->getService(22));
-    // check for cracker exploit
-    Exploit *exploit = ssh->getExploit(CRACK);
-    if(!exploit) {
-        return;
-    }
     
     // get random victim
     remote = internet->getRandomPerson()->getHost();
     if(remote->getServices().empty()) {
         return;
     }
-    // get random service
-    Service *service = remote->getServices()[rand() % remote->getServices().size()];
-    // can we exploit it?
-    if(service && service->getVersion() <= exploit->getVersion()) {
-        // hack it
+
+    // get random service from victim
+    Service *service = nullptr;
+    while(!service) {
+        for(pair<unsigned int, Service*> p: remote->getServices()) {
+            if(rand() % 2) {
+                service = p.second;
+                break;
+            }
+        }
+    }
+    
+    // do we have a similar service?
+    if(!host->hasService(service->getPort())) {
+        return;
+    }
+    
+    Service *local = host->getService(service->getPort());
+
+    // hack it if we can
+    if(service->getVersion() <= local->getVersion()) {
         service->getHacked(this);
     }
 }
@@ -121,6 +124,9 @@ void Person::hack(FinanceService *finance) {
     auto itr = creds.begin();
     advance(itr, rand() % creds.size());
     string victim = itr->second;
+    if(finance->getAccount(victim) <= 0) {
+        return;
+    }
     
     int amount = rand() % finance->getAccount(victim);
     local->transfer(getName(), amount, victim, remote->getIP()->toString());

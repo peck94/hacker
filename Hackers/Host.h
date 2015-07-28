@@ -63,7 +63,7 @@ public:
     bool ping(std::string ip);
     
     // get host
-    Host* resolve(std::string ip, Host *source = nullptr);
+    Host* resolve(std::string ip, std::set<std::string> record = std::set<std::string>{});
     
     // add host to network
     void link(Host* host);

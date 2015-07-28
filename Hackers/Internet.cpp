@@ -136,7 +136,7 @@ void Internet::animate() {
         for(pair<string, vector<Person*>> p: people) {
             for(Person *person: p.second) {
                 person->animate(gen, this);
-                this_thread::sleep_for(chrono::milliseconds(500));
+                this_thread::sleep_for(chrono::milliseconds(10));
                 
                 if(!active) {
                     break;
