@@ -14,8 +14,16 @@
 #include "ShellService.h"
 #include "Internet.h"
 #include "ResourceGenerator.h"
+#include "SSHService.h"
+#include "SMTPService.h"
+#include "FinanceService.h"
+#include "FTPService.h"
 
 class Internet;
+class FinanceService;
+class SMTPService;
+class FTPService;
+class SSHService;
 
 /*
  * Represents a person. People own hosts and do stuff with them.
@@ -28,6 +36,10 @@ private:
     std::string name;
     // store password
     std::string password;
+    // store resource generator
+    ResourceGenerator *generator;
+    // store current victim
+    Host *remote;
     
 public:
     // init
@@ -40,6 +52,12 @@ public:
     
     // AI
     virtual void animate(ResourceGenerator *gen, Internet *internet);
+    
+    // hack routines
+    void hack(SSHService *ssh);
+    void hack(FTPService *ftp);
+    void hack(SMTPService *smtp);
+    void hack(FinanceService *finance);
     
     virtual ~Person();
 };

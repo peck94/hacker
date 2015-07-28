@@ -17,6 +17,7 @@
 #include <set>
 
 class Service;
+class ResourceGenerator;
 
 /*
  * A host consists of an IP address and a collection of services.

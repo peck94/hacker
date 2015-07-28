@@ -11,11 +11,14 @@
 
 #include "Shell.h"
 #include "ShellService.h"
+#include "ResourceGenerator.h"
 #include "Host.h"
 #include "Program.h"
 #include <iostream>
 #include <vector>
 #include <set>
+
+class ResourceGenerator;
 
 /*
  * The SSH service allows the user to connect through this system onto another one.
@@ -33,8 +36,10 @@ public:
     
     virtual void run(Host* host);
     virtual void randomInit(ResourceGenerator *gen);
+    virtual void getHacked(Person *person);
     
     void addProgram(Program *program);
+    Exploit* getExploit(Vulnerability vuln);
     
     ~SSHService();
 };

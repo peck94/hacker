@@ -13,10 +13,10 @@
 #include <set>
 #include <memory>
 #include "Vulnerability.h"
-#include "Host.h"
-#include "ResourceGenerator.h"
 
+class Person;
 class Host;
+class ResourceGenerator;
 
 /*
  * A service is any program that runs on a certain port on a host. It has a name and a version, which together determine its vulnerabilities.
@@ -55,6 +55,9 @@ public:
     
     // init the serice with random data
     virtual void randomInit(ResourceGenerator *gen) = 0;
+
+    // get hacked
+    virtual void getHacked(Person *person) = 0;
     
     virtual ~Service();
 };

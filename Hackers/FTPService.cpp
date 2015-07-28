@@ -138,6 +138,10 @@ void FTPService::randomInit(ResourceGenerator *gen) {
     }
 }
 
+void FTPService::getHacked(Person *person) {
+    person->hack(this);
+}
+
 FTPService::~FTPService() {
     for(File *file: files) {
         delete file;

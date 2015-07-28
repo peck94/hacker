@@ -10,15 +10,16 @@
 #include "Person.h"
 using namespace std;
 
-Internet::Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVersion, string username, string password) {
+Internet::Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVersion, unsigned int maxUsers, string username, string password) {
     this->gen = gen;
     this->maxVersion = maxVersion;
+    this->maxUsers = maxUsers;
     this->size = size;
 
     // add localhost
     localhost = new Localhost();
     Person *player = new Person(localhost, username, password);
-    people[localhost->getIP()->toString()] = player;
+    people[localhost->getIP()->toString()].push_back(player);
     
     // register services
     registerService([] (unsigned int version) -> Service* {
@@ -46,18 +47,19 @@ void Internet::generate() {
             auto itr = people.begin();
             advance(itr, rand() % people.size());
             
-            Host *other = itr->second->getHost();
+            Host *other = itr->second[rand() % itr->second.size()]->getHost();
             if(!host->hasLink(other)) {
                 other->link(host);
                 break;
             }
         }
         
-        // create random person
-        Person *person = randomPerson(host);
-        
-        // add to network
-        people[host->getIP()->toString()] = person;
+        // add random persons
+        unsigned int owners = rand() % maxUsers;
+        for(unsigned int j = 0; j < owners; j++) {
+            Person *person = randomPerson(host);
+            people[host->getIP()->toString()].push_back(person);
+        }
     }
 }
 
@@ -111,7 +113,7 @@ Person* Internet::randomPerson(Host *host) {
     return new Person(host, username, password);
 }
 
-void Internet::registerService(factory f) {
+void Internet::registerService(service_factory f) {
     services.push_back(f);
 }
 
@@ -131,13 +133,14 @@ void Internet::stop() {
 
 void Internet::animate() {
     while(active) {
-        for(pair<string, Person*> p: people) {
-            Person *person = p.second;
-            person->animate(gen, this);
-            this_thread::sleep_for(chrono::milliseconds(500));
-            
-            if(!active) {
-                break;
+        for(pair<string, vector<Person*>> p: people) {
+            for(Person *person: p.second) {
+                person->animate(gen, this);
+                this_thread::sleep_for(chrono::milliseconds(500));
+                
+                if(!active) {
+                    break;
+                }
             }
         }
     }
@@ -146,12 +149,14 @@ void Internet::animate() {
 Person* Internet::getRandomPerson() {
     auto itr = people.begin();
     advance(itr, rand() % people.size());
-    return itr->second;
+    return itr->second[rand() % itr->second.size()];
 }
 
 Internet::~Internet() {
     stop();
-    for(pair<string, Person*> p: people) {
-        delete p.second;
+    for(pair<string, vector<Person*>> p: people) {
+        for(Person *person: p.second) {
+            delete person;
+        }
     }
 }

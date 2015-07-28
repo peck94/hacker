@@ -10,6 +10,7 @@
 #define __Hackers__FinanceService__
 
 #include "ShellService.h"
+#include "Person.h"
 #include <map>
 
 struct Transaction {
@@ -51,6 +52,7 @@ public:
     
     virtual void run(Host *host);
     virtual void randomInit(ResourceGenerator *gen);
+    virtual void getHacked(Person *person);
     
     ~FinanceService();
 };

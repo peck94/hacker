@@ -113,6 +113,10 @@ void FinanceService::randomInit(ResourceGenerator *gen) {
     // TODO
 }
 
+void FinanceService::getHacked(Person *person) {
+    person->hack(this);
+}
+
 FinanceService::~FinanceService() {
     for(Transaction *t: transactions) {
         delete t;

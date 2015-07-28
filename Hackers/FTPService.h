@@ -11,8 +11,11 @@
 
 #include "ShellService.h"
 #include "Shell.h"
+#include "ResourceGenerator.h"
 #include <list>
 #include <iomanip>
+
+class ResourceGenerator;
 
 struct File {
     std::string name;
@@ -36,6 +39,7 @@ public:
     
     virtual void run(Host *host);
     virtual void randomInit(ResourceGenerator *gen);
+    virtual void getHacked(Person *person);
     
     // add file
     void upload(File *file);

@@ -91,11 +91,36 @@ void SSHService::run(Host* host) {
 }
 
 void SSHService::randomInit(ResourceGenerator *gen) {
-    // TODO
+    // add random programs
+    unsigned int count = rand() % gen->getNumPrograms();
+    for(unsigned int i = 0; i < count; i++) {
+        addProgram(gen->randomProgram());
+    }
 }
 
 void SSHService::addProgram(Program *program) {
+    for(Program *p: programs) {
+        if(p->getName() == program->getName()) {
+            return;
+        }
+    }
+
     programs.insert(program);
+}
+
+void SSHService::getHacked(Person *person) {
+    person->hack(this);
+}
+
+Exploit* SSHService::getExploit(Vulnerability vuln) {
+    for(Program *p: programs) {
+        Exploit *e = dynamic_cast<Exploit*>(p);
+        if(e && e->getVuln() == vuln) {
+            return e;
+        }
+    }
+    
+    return nullptr;
 }
 
 SSHService::~SSHService() {

@@ -23,7 +23,7 @@
 #include "FinanceService.h"
 #include "ResourceGenerator.h"
 
-typedef std::function<Service*(unsigned int)> factory;
+typedef std::function<Service*(unsigned int)> service_factory;
 
 class Person;
 
@@ -33,11 +33,13 @@ class Person;
 class Internet {
 private:
     // store people
-    std::map<std::string, Person*> people;
+    std::map<std::string, std::vector<Person*>> people;
     // store service factories
-    std::vector<factory> services;
+    std::vector<service_factory> services;
     // store max version
     unsigned int maxVersion;
+    // store max users per system
+    unsigned int maxUsers;
     // store size
     unsigned int size;
     // store localhost
@@ -60,7 +62,7 @@ private:
 
 public:
     // init
-    Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVersion, std::string username, std::string password);
+    Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVersion, unsigned int maxUsers, std::string username, std::string password);
     
     // create the network
     void generate();
@@ -72,7 +74,7 @@ public:
     void stop();
     
     // register a service
-    void registerService(factory f);
+    void registerService(service_factory f);
     
     // get local host
     Host* getLocalhost();

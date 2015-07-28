@@ -10,7 +10,10 @@
 #define __Hackers__SMTPService__
 
 #include "ShellService.h"
+#include "Person.h"
 #include <map>
+
+class Person;
 
 struct Email {
     // IP of sender
@@ -43,6 +46,7 @@ public:
     
     virtual void run(Host *host);
     virtual void randomInit(ResourceGenerator *gen);
+    virtual void getHacked(Person *person);
     
     ~SMTPService();
 };

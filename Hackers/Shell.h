@@ -66,7 +66,7 @@ public:
     
     // add log entry
     void addLog(std::string entry);
-    void addLog(std::string ip, std::string entry);
+    void addLog(IP* ip, std::string entry);
     
     // clear logs
     void clearLogs();

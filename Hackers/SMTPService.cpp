@@ -138,6 +138,10 @@ void SMTPService::randomInit(ResourceGenerator *gen) {
     // TODO
 }
 
+void SMTPService::getHacked(Person *person) {
+    person->hack(this);
+}
+
 SMTPService::~SMTPService() {
     for(pair<string, vector<Email*>> p: emails) {
         for(Email* email: p.second) {

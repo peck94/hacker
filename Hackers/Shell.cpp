@@ -163,6 +163,10 @@ void Shell::addLog(string entry) {
     logs.push_back(new LogEntry{localhost->getIP(), entry});
 }
 
+void Shell::addLog(IP* ip, string entry) {
+    logs.push_back(new LogEntry{ip, entry});
+}
+
 void Shell::clearLogs() {
     logs.clear();
 }

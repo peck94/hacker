@@ -9,11 +9,27 @@
 #include "ResourceGenerator.h"
 using namespace std;
 
-ResourceGenerator::ResourceGenerator() {
+ResourceGenerator::ResourceGenerator(unsigned int maxVersion) {
+    this->maxVersion = maxVersion;
+    
     // load resources
     loadFile("resources/usernames.txt", usernames);
     loadFile("resources/passwords.txt", passwords);
     loadFile("resources/subjects.txt", subjects);
+    
+    // load programs
+    programs.push_back([] (unsigned int version) -> Program* {
+        return new LogDeleter(version);
+    });
+    programs.push_back([] (unsigned int version) -> Program* {
+        return new Robber(version);
+    });
+    programs.push_back([] (unsigned int version) -> Program* {
+        return new Cracker(version);
+    });
+    programs.push_back([] (unsigned int version) -> Program* {
+        return new TransDeleter(version);
+    });
     
     // set counts
     this->num_emails = 1097;
@@ -87,4 +103,12 @@ string ResourceGenerator::randomEmail() {
 
 string ResourceGenerator::randomFile() {
     return randomContents("resources/articles/", num_files);
+}
+
+Program* ResourceGenerator::randomProgram() {
+    return programs[rand() % programs.size()](rand() % maxVersion);
+}
+
+unsigned int ResourceGenerator::getNumPrograms() {
+    return programs.size();
 }

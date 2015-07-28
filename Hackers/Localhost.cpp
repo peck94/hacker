@@ -11,24 +11,21 @@ using namespace std;
 
 Localhost::Localhost(): Host(new IP()) {
     SSHService *ssh = new SSHService(2);
-    ssh->addProgram(new LogDeleter(2));
+    ssh->addProgram(new LogDeleter(1));
     ssh->addProgram(new Robber(1));
-    ssh->addProgram(new Cracker(10));
-    ssh->addProgram(new TransDeleter(5));
+    ssh->addProgram(new Cracker(1));
+    ssh->addProgram(new TransDeleter(1));
     ssh->addProgram(new ScannerProgram());
     addService(ssh);
     
-    FTPService *ftp = new FTPService(3);
+    FTPService *ftp = new FTPService(1);
     ftp->upload(new File{"motd", "Have a nice day!"});
     addService(ftp);
     
-    SMTPService *smtp = new SMTPService(6);
-    smtp->getShell()->addCredentials("smtp", "smtp");
+    SMTPService *smtp = new SMTPService(1);
     addService(smtp);
     
     FinanceService *f = new FinanceService(1);
-    f->addAccount("smtp", "smtp", 100);
-    f->addAccount("admin", "admin", 50);
     f->addVuln(THEFT);
     addService(f);
 }
