@@ -18,6 +18,7 @@
 #include "SMTPService.h"
 #include "FinanceService.h"
 #include "FTPService.h"
+#include "Cacher.h"
 
 class Internet;
 class FinanceService;
