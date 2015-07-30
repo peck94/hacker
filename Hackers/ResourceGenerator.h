@@ -14,6 +14,7 @@
 #include "Robber.h"
 #include "Cracker.h"
 #include "TransDeleter.h"
+#include "Cacher.h"
 #include <vector>
 #include <string>
 #include <stdlib.h>
@@ -33,25 +34,26 @@ private:
     unsigned int num_emails;
     unsigned int num_files;
     // store cache
-    std::map<std::string, std::string> cache;
+    Cacher<std::string, std::string> *cache;
     // store max version
     unsigned int maxVersion;
 
-    std::string randomString(std::vector<std::string> resource);
-    std::string randomContents(std::string path, unsigned int count);
+    Record<std::string>* randomString(std::vector<std::string> resource);
+    Record<std::string>* randomContents(std::string path, unsigned int count);
     void loadFile(std::string filename, std::vector<std::string>& resource);
     
 public:
     ResourceGenerator(unsigned int maxVersion);
     
-    std::string randomName();
-    std::string randomPassword();
-    std::string randomEmail();
-    std::string randomSubject();
-    std::string randomFile();
+    Record<std::string>* randomName();
+    Record<std::string>* randomPassword();
+    Record<std::string>* randomEmail();
+    Record<std::string>* randomSubject();
+    Record<std::string>* randomFile();
     Program* randomProgram();
     
     unsigned int getNumPrograms();
+    ~ResourceGenerator();
 };
 
 #endif /* defined(__Hackers__ResourceGenerator__) */
