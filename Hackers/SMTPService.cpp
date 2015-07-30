@@ -72,9 +72,10 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
         }
         
         string localname = getShell()->getSession().first;
-        string ipSender = localhost->getIP()->toString();
+        IP* ipSender = localhost->getIP();
         Email *email = new Email{ipSender, localname, name, subject, body};
         s->recv(email);
+        getShell()->addLog(ipSender, "[Sent: " + subject + "]");
         cout << "E-mail sent to " << name << "@" << ipRecv << " from " << localname << "@" << ipSender << "." << endl;
     }, true);
     getShell()->add("show", [this] (vector<string> args) {
@@ -117,6 +118,7 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
 }
 
 void SMTPService::recv(Email *email) {
+    getShell()->addLog(email->ipSender, "[Received: " + email->subject + "]");
     if(emails.find(email->nameTarget) == emails.end()) {
         emails[email->nameTarget] = vector<Email*>{email};
     }else{

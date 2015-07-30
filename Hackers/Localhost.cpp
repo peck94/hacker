@@ -10,11 +10,11 @@
 using namespace std;
 
 Localhost::Localhost(): Host(new IP()) {
-    SSHService *ssh = new SSHService(2);
-    ssh->addProgram(new LogDeleter(1));
-    ssh->addProgram(new Robber(1));
-    ssh->addProgram(new Cracker(1));
-    ssh->addProgram(new TransDeleter(1));
+    SSHService *ssh = new SSHService(1);
+    ssh->addProgram(new LogDeleter(10));
+    ssh->addProgram(new Robber(10));
+    ssh->addProgram(new Cracker(10));
+    ssh->addProgram(new TransDeleter(10));
     ssh->addProgram(new ScannerProgram());
     addService(ssh);
     

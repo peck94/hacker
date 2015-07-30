@@ -85,13 +85,12 @@ void Person::hack(SSHService *ssh) {
 }
 
 void Person::hack(FTPService *ftp) {
-    // create a file
-    ftp->upload(new File{"file_" + generator->randomName(), generator->randomFile()});
+    // nothing
 }
 
 void Person::hack(SMTPService *smtp) {
     // send spam
-    string ipSender = getHost()->getIP()->toString();
+    IP* ipSender = getHost()->getIP();
     string nameSource = getName();
     string nameTarget;
     string subject = generator->randomSubject();
@@ -123,7 +122,7 @@ void Person::hack(FinanceService *finance) {
     
     auto itr = creds.begin();
     advance(itr, rand() % creds.size());
-    string victim = itr->second;
+    string victim = itr->first;
     if(finance->getAccount(victim) <= 0) {
         return;
     }

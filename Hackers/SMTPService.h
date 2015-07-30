@@ -17,7 +17,7 @@ class Person;
 
 struct Email {
     // IP of sender
-    std::string ipSender;
+    IP* ipSender;
     // username of source
     std::string nameSource;
     // username of target
