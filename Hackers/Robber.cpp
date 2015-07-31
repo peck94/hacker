@@ -43,8 +43,8 @@ void Robber::run(Host *local, Host *remote, unsigned int port) {
     cout << "Amount: ";
     cin >> amount;
     
-    if(fr->transfer(victim, -amount, other, local->getIP()->toString()) &&
-       fl->transfer(other, amount, victim, remote->getIP()->toString())) {
+    if(fr->transfer(victim, -amount, other, local->getIP()) &&
+       fl->transfer(other, amount, victim, remote->getIP())) {
         cout << "The exploit completed successfully." << endl;
     }else{
         cout << "The exploit failed." << endl;

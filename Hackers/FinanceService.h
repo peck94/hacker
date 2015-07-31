@@ -12,13 +12,14 @@
 #include "ShellService.h"
 #include "Person.h"
 #include "Cache.h"
+#include "Record.h"
 #include <map>
 
 struct Transaction {
-    std::string name;
+    StringRecord* name;
     int amount;
-    std::string sender;
-    std::string ip;
+    StringRecord* sender;
+    IP* ip;
 };
 
 /*
@@ -46,7 +47,7 @@ public:
     int getAccount(std::string name);
     
     // transfer money to account
-    bool transfer(std::string name, int amount, std::string sender, std::string ip);
+    bool transfer(std::string name, int amount, std::string sender, IP* ip);
     
     // clear some account's log
     void clearLog(std::string name);

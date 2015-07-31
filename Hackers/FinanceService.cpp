@@ -21,15 +21,15 @@ FinanceService::FinanceService(unsigned int version): ShellService(Cache::queryC
         cout << "Balance: " << balance << endl;
         cout << "Transaction log:" << endl;
         for(Transaction *t: transactions) {
-            if(t->name == name) {
-                cout << t->sender << "@" << t->ip << ": " << t->amount << endl;
+            if(t->name->get() == name) {
+                cout << t->sender->get() << "@" << t->ip->toString() << ": " << t->amount << endl;
             }
         }
     }, true);
     getShell()->add("transfer", [this] (vector<string> args) {
         // transfer money from this account
         string localname = getShell()->getSession().first;
-        string localip = localhost->getIP()->toString();
+        IP* localip = localhost->getIP();
         string ip, remotename;
         int amount;
         
@@ -64,7 +64,7 @@ FinanceService::FinanceService(unsigned int version): ShellService(Cache::queryC
         }
         
         if(f->transfer(remotename, amount, localname, localip)) {
-            transfer(localname, -amount, remotename, ip);
+            transfer(localname, -amount, remotename, remote->getIP());
             cout << "The transfer was ACCEPTED." << endl;
         }else{
             cout << "The transfer was REJECTED." << endl;
@@ -77,11 +77,15 @@ void FinanceService::addAccount(string name, string password, int balance) {
     getShell()->addCredentials(name, password);
 }
 
-bool FinanceService::transfer(string name, int amount, string sender, string ip) {
+bool FinanceService::transfer(string name, int amount, string sender, IP* ip) {
     int result = accounts[name] + amount;
     if(result >= 0) {
         accounts[name] = result;
-        transactions.push_back(new Transaction{name, amount, sender, ip});
+        transactions.push_back(new Transaction{
+            Cache::queryCache(name),
+            amount,
+            Cache::queryCache(sender),
+            ip});
         return true;
     }else{
         return false;
@@ -94,7 +98,7 @@ bool FinanceService::hasAccount(string name) {
 
 void FinanceService::clearLog(string name) {
     for(auto itr = transactions.begin(); itr != transactions.end(); itr++) {
-        if((*itr)->name == name) {
+        if((*itr)->name->get() == name) {
             transactions.erase(itr);
         }
     }

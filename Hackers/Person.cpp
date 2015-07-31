@@ -128,8 +128,8 @@ void Person::hack(FinanceService *finance) {
     }
     
     int amount = rand() % finance->getAccount(victim);
-    local->transfer(getName()->get(), amount, victim, remote->getIP()->toString());
-    finance->transfer(victim, -amount, getName()->get(), getHost()->getIP()->toString());
+    local->transfer(getName()->get(), amount, victim, remote->getIP());
+    finance->transfer(victim, -amount, getName()->get(), getHost()->getIP());
 }
 
 Person::~Person() {}
