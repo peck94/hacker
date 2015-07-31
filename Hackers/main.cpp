@@ -22,9 +22,9 @@ int main(int argc, const char * argv[]) {
     
     cout << "Loading..." << endl;
     
-    unsigned int size = 256;
+    unsigned int size = 1024;
     unsigned int maxVersion = 10;
-    unsigned int maxUsers = 10;
+    unsigned int maxUsers = 100;
     ResourceGenerator *gen = new ResourceGenerator(maxVersion);
 
     Internet *internet = new Internet(gen, size, maxVersion, maxUsers, user, pass);
@@ -33,7 +33,10 @@ int main(int argc, const char * argv[]) {
     cout << endl;
     internet->getLocalhost()->connect(22);
     
+    cout << "Shutting down..." << endl;
     delete internet;
     delete gen;
+    
+    cout << "Done." << endl;
     return 0;
 }

@@ -80,7 +80,6 @@ SMTPService::SMTPService(unsigned int version): ShellService(Cache::queryCache("
             Cache::queryCache(subject),
             Cache::queryCache(body)};
         s->recv(email);
-        getShell()->addLog(ipSender, "[Sent: " + subject + "]");
         cout << "E-mail sent to " << name << "@" << ipRecv << " from " << localname << "@" << ipSender << "." << endl;
     }, true);
     getShell()->add("show", [this] (vector<string> args) {
@@ -123,17 +122,10 @@ SMTPService::SMTPService(unsigned int version): ShellService(Cache::queryCache("
 }
 
 void SMTPService::recv(Email *email) {
-    getShell()->addLog(email->ipSender,
-                       "[Received: " + email->subject->get() + "]");
     if(emails.find(email->nameTarget->get()) == emails.end()) {
         emails[email->nameTarget->get()] = vector<Email*>{email};
     }else{
         emails[email->nameTarget->get()].push_back(email);
-    }
-    
-    // notify if addressed to us
-    if(email->nameTarget->get() == getShell()->getSession().first && getShell()->isAuthenticated()) {
-        cout << endl << "New e-mail from " << email->nameSource->get() << "@" << email->ipSender->toString() << "!" << endl;
     }
 }
 
