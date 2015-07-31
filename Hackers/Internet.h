@@ -21,6 +21,7 @@
 #include "FTPService.h"
 #include "SMTPService.h"
 #include "FinanceService.h"
+#include "FingerService.h"
 #include "ResourceGenerator.h"
 
 typedef std::function<Service*(unsigned int)> service_factory;

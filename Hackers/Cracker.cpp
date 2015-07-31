@@ -24,11 +24,15 @@ void Cracker::run(Host *local, Host *remote, unsigned int port) {
         return;
     }
     
-    auto itr = creds.begin();
-    advance(itr, rand() % creds.size());
+    string name;
+    cout << "Username: ";
+    getline(cin, name);
+    if(!s->getShell()->hasUser(name)) {
+        cout << "User not found." << endl;
+        return;
+    }
     
-    cout << "Username: " << itr->first << endl;
-    cout << "Password: " << itr->second << endl;
+    cout << "Password: " << creds[name] << endl;
 }
 
 string Cracker::help() {

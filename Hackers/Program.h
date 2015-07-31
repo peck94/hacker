@@ -13,6 +13,8 @@
 #include <string>
 #include <vector>
 
+class Host;
+
 class Program {
 private:
     // store name (used in shell)

@@ -14,6 +14,7 @@
 #include <memory>
 #include "Vulnerability.h"
 #include "Record.h"
+#include "Program.h"
 
 class Person;
 class Host;
@@ -54,7 +55,7 @@ public:
     // run the service
     virtual void run(Host* host) = 0;
     
-    // init the serice with random data
+    // init the service with random data
     virtual void randomInit(ResourceGenerator *gen) = 0;
 
     // get hacked

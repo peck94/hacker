@@ -132,4 +132,6 @@ void Person::hack(FinanceService *finance) {
     finance->transfer(victim, -amount, getName()->get(), getHost()->getIP());
 }
 
+void Person::hack(FingerService *finger) {}
+
 Person::~Person() {}

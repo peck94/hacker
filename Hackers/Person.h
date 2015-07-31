@@ -18,6 +18,7 @@
 #include "SMTPService.h"
 #include "FinanceService.h"
 #include "FTPService.h"
+#include "FingerService.h"
 
 class Internet;
 class FinanceService;
@@ -58,6 +59,7 @@ public:
     void hack(FTPService *ftp);
     void hack(SMTPService *smtp);
     void hack(FinanceService *finance);
+    void hack(FingerService *finger);
     
     virtual ~Person();
 };
