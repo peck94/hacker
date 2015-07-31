@@ -37,6 +37,9 @@ Internet::Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVe
     registerService([] (unsigned int version) -> Service* {
         return new FingerService(version);
     });
+    registerService([] (unsigned int version) -> Service* {
+        return new TracerService(version);
+    });
 }
 
 void Internet::generate() {
