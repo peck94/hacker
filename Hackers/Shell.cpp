@@ -47,7 +47,7 @@ Shell::Shell() {
     add("logs", [this] (vector<string> args) {
         for(LogEntry *entry: logs) {
             cout << left << setw(12) << entry->ip->toString();
-            cout << entry->data << endl;
+            cout << entry->data->get() << endl;
         }
     }, true);
     add("passwd", [this] (vector<string> args) {
@@ -160,11 +160,13 @@ bool Shell::hasUser(string user) {
 }
 
 void Shell::addLog(string entry) {
-    logs.push_back(new LogEntry{localhost->getIP(), entry});
+    logs.push_back(new LogEntry{localhost->getIP(),
+        Cache::queryCache(entry)});
 }
 
 void Shell::addLog(IP* ip, string entry) {
-    logs.push_back(new LogEntry{ip, entry});
+    logs.push_back(new LogEntry{ip,
+        Cache::queryCache(entry)});
 }
 
 bool Shell::isAuthenticated() {

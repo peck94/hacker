@@ -11,6 +11,8 @@
 
 #include "IP.h"
 #include "Host.h"
+#include "Cache.h"
+#include "Record.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -22,7 +24,7 @@ typedef std::function<void(std::vector<std::string>)> command;
 
 struct LogEntry {
     IP *ip;
-    std::string data;
+    StringRecord* data;
 };
 
 /*
