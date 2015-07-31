@@ -202,6 +202,7 @@
 		AB4C238B1B66BE8E0079C62B /* Programs */ = {
 			isa = PBXGroup;
 			children = (
+				ABE4FB7F1B6BBA2200760FCA /* Viri */,
 				AB0196D41B6580AA000A6F5A /* Exploits */,
 				AB09C9F51B65BA2600759DAE /* Program.cpp */,
 				AB09C9F61B65BA2600759DAE /* Program.h */,
@@ -209,6 +210,13 @@
 				AB4C238D1B66BEA60079C62B /* ScannerProgram.h */,
 			);
 			name = Programs;
+			sourceTree = "<group>";
+		};
+		ABE4FB7F1B6BBA2200760FCA /* Viri */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Viri;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

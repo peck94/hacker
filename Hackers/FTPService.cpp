@@ -30,7 +30,7 @@ FTPService::FTPService(unsigned int version): ShellService(Cache::queryCache("FT
         cout << setw(width) << "Filename ";
         cout << "Size" << endl;
         for(File *file: files) {
-            cout << left << setw(width) << file->name;
+            cout << left << setw(width) << file->name->get();
             cout << file->contents->get().length() << "b" << endl;
         }
     }, true);
