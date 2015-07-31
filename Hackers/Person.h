@@ -19,12 +19,14 @@
 #include "FinanceService.h"
 #include "FTPService.h"
 #include "FingerService.h"
+#include "TracerService.h"
 
 class Internet;
 class FinanceService;
 class SMTPService;
 class FTPService;
 class SSHService;
+class TracerService;
 
 /*
  * Represents a person. People own hosts and do stuff with them.
@@ -41,6 +43,8 @@ private:
     ResourceGenerator *generator;
     // store current victim
     Host *remote;
+    // store tracer
+    TracerService *tracer = nullptr;
     
 public:
     // init
@@ -60,6 +64,7 @@ public:
     void hack(SMTPService *smtp);
     void hack(FinanceService *finance);
     void hack(FingerService *finger);
+    void hack(TracerService *tracer);
     
     virtual ~Person();
 };

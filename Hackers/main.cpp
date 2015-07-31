@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) {
     
     unsigned int size = 1024;
     unsigned int maxVersion = 10;
-    unsigned int maxUsers = 100;
+    unsigned int maxUsers = 10;
     ResourceGenerator *gen = new ResourceGenerator(maxVersion);
 
     Internet *internet = new Internet(gen, size, maxVersion, maxUsers, user, pass);

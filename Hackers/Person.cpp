@@ -30,6 +30,12 @@ Person::Person(Host *host, StringRecord* name, StringRecord* password) {
         if(fs) {
             fs->addAccount(getName()->get(), getPassword()->get(), rand());
         }
+        
+        // tracer
+        TracerService *ts = dynamic_cast<TracerService*>(s);
+        if(ts) {
+            tracer = ts;
+        }
     }
 }
 
@@ -48,6 +54,11 @@ Host* Person::getHost() {
 void Person::animate(ResourceGenerator *gen, Internet *internet) {
     Host *host = getHost();
     this->generator = gen;
+    
+    // run trace if possible
+    if(tracer) {
+        tracer->run(getHost());
+    }
     
     // get random victim
     remote = internet->getRandomPerson()->getHost();
@@ -133,5 +144,9 @@ void Person::hack(FinanceService *finance) {
 }
 
 void Person::hack(FingerService *finger) {}
+
+void Person::hack(TracerService *tracer) {
+    tracer->setEnabled(rand() % 2 == 0);
+}
 
 Person::~Person() {}

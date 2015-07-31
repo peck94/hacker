@@ -39,7 +39,7 @@ public:
     Service(StringRecord* name, unsigned int port, unsigned int version);
     
     // print banner
-    std::string printBanner();
+    virtual std::string printBanner();
     
     // getters
     StringRecord* getName();

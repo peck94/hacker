@@ -33,6 +33,12 @@ public:
     
     // get hacked
     virtual void getHacked(Person *person);
+    
+    // banner
+    virtual std::string printBanner();
+    
+    // active flag
+    void setEnabled(bool flag);
 };
 
 #endif /* defined(__Hackers__TracerService__) */

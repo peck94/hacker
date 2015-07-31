@@ -7,15 +7,18 @@
 //
 
 #include "TracerService.h"
+using namespace std;
 
 TracerService::TracerService(unsigned int version): Service(Cache::queryCache("Tracer"), 13, version) {}
 
 void TracerService::run(Host *host) {
     if(!active) {
+        cout << "tracer inactive on " << host->getIP()->toString() << endl;
         return;
     }
     
     // perform trace
+    cout << host->getIP()->toString() << " is running a trace" << endl;
 }
 
 void TracerService::randomInit(ResourceGenerator *gen) {
@@ -23,6 +26,21 @@ void TracerService::randomInit(ResourceGenerator *gen) {
 }
 
 void TracerService::getHacked(Person *person) {
-    // disable the service
-    active = false;
+    person->hack(this);
 }
+
+string TracerService::printBanner() {
+    string result = Service::printBanner();
+    if(active) {
+        result+= " (ENABLED)";
+    }else{
+        result+= " (DISABLED)";
+    }
+    
+    return result;
+}
+
+void TracerService::setEnabled(bool flag) {
+    active = flag;
+}
+
