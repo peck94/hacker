@@ -9,7 +9,7 @@
 #include "ShellService.h"
 using namespace std;
 
-ShellService::ShellService(string name, unsigned int port, unsigned int version): Service(name, port, version) {
+ShellService::ShellService(StringRecord* name, unsigned int port, unsigned int version): Service(name, port, version) {
     shell = new Shell();
 }
 

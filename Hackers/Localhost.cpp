@@ -19,7 +19,6 @@ Localhost::Localhost(): Host(new IP()) {
     addService(ssh);
     
     FTPService *ftp = new FTPService(1);
-    ftp->upload(new File{"motd", "Have a nice day!"});
     addService(ftp);
     
     SMTPService *smtp = new SMTPService(1);

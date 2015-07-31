@@ -21,7 +21,7 @@ private:
     Shell *shell;
 
 public:
-    ShellService(std::string name, unsigned int port, unsigned int version);
+    ShellService(StringRecord* name, unsigned int port, unsigned int version);
     
     Shell* getShell();
     

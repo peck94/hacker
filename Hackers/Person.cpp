@@ -10,7 +10,7 @@
 #include "Internet.h"
 using namespace std;
 
-Person::Person(Host *host, string name, string password) {
+Person::Person(Host *host, StringRecord* name, StringRecord* password) {
     this->host = host;
     this->name = name;
     this->password = password;
@@ -22,22 +22,22 @@ Person::Person(Host *host, string name, string password) {
         // install credentials to shell
         ShellService *ss = dynamic_cast<ShellService*>(s);
         if(ss) {
-            ss->getShell()->addCredentials(name, password);
+            ss->getShell()->addCredentials(name->get(), password->get());
         }
         
         // get money
         FinanceService *fs = dynamic_cast<FinanceService*>(s);
         if(fs) {
-            fs->addAccount(getName(), getPassword(), rand());
+            fs->addAccount(getName()->get(), getPassword()->get(), rand());
         }
     }
 }
 
-string Person::getName() {
+StringRecord* Person::getName() {
     return name;
 }
 
-string Person::getPassword() {
+StringRecord* Person::getPassword() {
     return password;
 }
 
@@ -81,7 +81,7 @@ void Person::animate(ResourceGenerator *gen, Internet *internet) {
 
 void Person::hack(SSHService *ssh) {
     // leave a taunt in the logs
-    ssh->getShell()->addLog(getHost()->getIP(), getName() + " waz here");
+    ssh->getShell()->addLog(getHost()->getIP(), getName()->get() + " waz here");
 }
 
 void Person::hack(FTPService *ftp) {
@@ -91,10 +91,10 @@ void Person::hack(FTPService *ftp) {
 void Person::hack(SMTPService *smtp) {
     // send spam
     IP* ipSender = getHost()->getIP();
-    string nameSource = getName();
-    string nameTarget;
-    string subject = generator->randomSubject();
-    string body = generator->randomEmail();
+    StringRecord* nameSource = getName();
+    StringRecord* nameTarget;
+    StringRecord* subject = generator->randomSubject();
+    StringRecord* body = generator->randomEmail();
     
     auto creds = smtp->getShell()->getCredentials();
     if(creds.size() == 0) {
@@ -103,7 +103,7 @@ void Person::hack(SMTPService *smtp) {
     
     auto itr = creds.begin();
     advance(itr, rand() % creds.size());
-    nameTarget = itr->second;
+    nameTarget = Cache::queryCache(itr->first);
 
     smtp->recv(new Email{ipSender, nameSource, nameTarget, subject, body});
 }
@@ -128,8 +128,8 @@ void Person::hack(FinanceService *finance) {
     }
     
     int amount = rand() % finance->getAccount(victim);
-    local->transfer(getName(), amount, victim, remote->getIP()->toString());
-    finance->transfer(victim, -amount, getName(), getHost()->getIP()->toString());
+    local->transfer(getName()->get(), amount, victim, remote->getIP()->toString());
+    finance->transfer(victim, -amount, getName()->get(), getHost()->getIP()->toString());
 }
 
 Person::~Person() {}

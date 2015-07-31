@@ -9,7 +9,7 @@
 #include "SSHService.h"
 using namespace std;
 
-SSHService::SSHService(unsigned int version): ShellService("SSH", 22, version) {
+SSHService::SSHService(unsigned int version): ShellService(Cache::queryCache("SSH"), 22, version) {
     Shell *shell = getShell();
     shell->add("help", [this] (vector<string> args) {
         cout << "Command listing:" << endl;

@@ -9,7 +9,7 @@
 #include "Service.h"
 using namespace std;
 
-Service::Service(string name, unsigned int port, unsigned int version) {
+Service::Service(StringRecord* name, unsigned int port, unsigned int version) {
     this->name = name;
     this->port = port;
     this->version = version;
@@ -19,12 +19,12 @@ Service::Service(string name, unsigned int port, unsigned int version) {
     addVuln(LOG_DELETER);
 }
 
-string Service::getName() {
+StringRecord* Service::getName() {
     return name;
 }
 
 string Service::printBanner() {
-    return getName() + " version " + to_string(getVersion());
+    return getName()->get() + " version " + to_string(getVersion());
 }
 
 unsigned int Service::getPort() {

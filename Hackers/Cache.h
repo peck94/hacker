@@ -22,6 +22,8 @@ public:
     
     static StringRecord* queryCache(std::string item, std::string contents);
     
+    static StringRecord* queryCache(std::string item);
+    
     static void addCache(std::string item, std::string contents);
     
     static StringRecord* getCache(std::string item);

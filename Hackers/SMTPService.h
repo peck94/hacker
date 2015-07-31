@@ -11,6 +11,8 @@
 
 #include "ShellService.h"
 #include "Person.h"
+#include "Record.h"
+#include "Cache.h"
 #include <map>
 
 class Person;
@@ -19,13 +21,13 @@ struct Email {
     // IP of sender
     IP* ipSender;
     // username of source
-    std::string nameSource;
+    StringRecord* nameSource;
     // username of target
-    std::string nameTarget;
+    StringRecord* nameTarget;
     // subject line
-    std::string subject;
+    StringRecord* subject;
     // body of email
-    std::string body;
+    StringRecord* body;
 };
 
 /*

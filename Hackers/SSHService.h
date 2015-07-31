@@ -14,6 +14,7 @@
 #include "ResourceGenerator.h"
 #include "Host.h"
 #include "Program.h"
+#include "Cache.h"
 #include <iostream>
 #include <vector>
 #include <set>

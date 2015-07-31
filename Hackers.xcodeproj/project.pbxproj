@@ -28,7 +28,7 @@
 		AB716CC11B6690510053EC49 /* SMTPService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CBF1B6690510053EC49 /* SMTPService.cpp */; };
 		AB716CC41B669B0D0053EC49 /* FinanceService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CC21B669B0D0053EC49 /* FinanceService.cpp */; };
 		AB716CC71B66A2060053EC49 /* Robber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB716CC51B66A2060053EC49 /* Robber.cpp */; };
-		AB7D255C1B6AC5720084D2DC /* Cacher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7D255A1B6AC5720084D2DC /* Cacher.cpp */; };
+		ABE4FB7E1B6BAE0600760FCA /* Cache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABE4FB7C1B6BAE0600760FCA /* Cache.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,8 +87,9 @@
 		AB716CC31B669B0D0053EC49 /* FinanceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinanceService.h; sourceTree = "<group>"; };
 		AB716CC51B66A2060053EC49 /* Robber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Robber.cpp; sourceTree = "<group>"; };
 		AB716CC61B66A2060053EC49 /* Robber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Robber.h; sourceTree = "<group>"; };
-		AB7D255A1B6AC5720084D2DC /* Cacher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cacher.cpp; sourceTree = "<group>"; };
-		AB7D255B1B6AC5720084D2DC /* Cacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
+		ABE4FB7B1B6BACB400760FCA /* Record.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		ABE4FB7C1B6BAE0600760FCA /* Cache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cache.cpp; sourceTree = "<group>"; };
+		ABE4FB7D1B6BAE0600760FCA /* Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +137,9 @@
 				AB4C23901B66D96C0079C62B /* Person.h */,
 				AB4C23921B66EA950079C62B /* ResourceGenerator.cpp */,
 				AB4C23931B66EA950079C62B /* ResourceGenerator.h */,
-				AB7D255E1B6AC7B30084D2DC /* Cacher */,
+				ABE4FB7B1B6BACB400760FCA /* Record.h */,
+				ABE4FB7C1B6BAE0600760FCA /* Cache.cpp */,
+				ABE4FB7D1B6BAE0600760FCA /* Cache.h */,
 			);
 			path = Hackers;
 			sourceTree = "<group>";
@@ -208,15 +211,6 @@
 			name = Programs;
 			sourceTree = "<group>";
 		};
-		AB7D255E1B6AC7B30084D2DC /* Cacher */ = {
-			isa = PBXGroup;
-			children = (
-				AB7D255A1B6AC5720084D2DC /* Cacher.cpp */,
-				AB7D255B1B6AC5720084D2DC /* Cacher.h */,
-			);
-			name = Cacher;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -281,6 +275,7 @@
 				AB0196CF1B657E33000A6F5A /* Exploit.cpp in Sources */,
 				AB09C9FA1B65BC1000759DAE /* LogDeleter.cpp in Sources */,
 				AB0196C71B657AEE000A6F5A /* IP.cpp in Sources */,
+				ABE4FB7E1B6BAE0600760FCA /* Cache.cpp in Sources */,
 				AB0196CA1B657C12000A6F5A /* Service.cpp in Sources */,
 				AB4C23841B66A8B20079C62B /* Cracker.cpp in Sources */,
 				AB4C23941B66EA950079C62B /* ResourceGenerator.cpp in Sources */,
@@ -288,7 +283,6 @@
 				AB0196D71B658978000A6F5A /* SSHService.cpp in Sources */,
 				AB4C23871B66B02D0079C62B /* TransDeleter.cpp in Sources */,
 				AB0196E01B65A663000A6F5A /* FTPService.cpp in Sources */,
-				AB7D255C1B6AC5720084D2DC /* Cacher.cpp in Sources */,
 				AB0196BC1B6579EC000A6F5A /* main.cpp in Sources */,
 				AB0196C41B657A0A000A6F5A /* Host.cpp in Sources */,
 				AB0196E31B65A77E000A6F5A /* Shell.cpp in Sources */,

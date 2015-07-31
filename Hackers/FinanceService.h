@@ -11,6 +11,7 @@
 
 #include "ShellService.h"
 #include "Person.h"
+#include "Cache.h"
 #include <map>
 
 struct Transaction {

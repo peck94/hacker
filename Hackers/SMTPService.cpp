@@ -9,7 +9,7 @@
 #include "SMTPService.h"
 using namespace std;
 
-SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version) {
+SMTPService::SMTPService(unsigned int version): ShellService(Cache::queryCache("SMTP"), 25, version) {
     getShell()->add("help", [this] (vector<string> args) {
         cout << "list: list e-mails for your account" << endl;
         cout << "send: send an e-mail" << endl;
@@ -28,8 +28,8 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
         cout << "Messages for " << name << ":" << endl;
         for(int i = 0; i < emails[name].size(); i++) {
             Email *email = emails[name][i];
-            if(email->nameTarget == name) {
-                cout << i+1 << ". " << email->subject << endl;
+            if(email->nameTarget->get() == name) {
+                cout << i+1 << ". " << email->subject->get() << endl;
             }
         }
     }, true);
@@ -73,7 +73,12 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
         
         string localname = getShell()->getSession().first;
         IP* ipSender = localhost->getIP();
-        Email *email = new Email{ipSender, localname, name, subject, body};
+        Email *email = new Email{
+            ipSender,
+            Cache::queryCache(localname),
+            Cache::queryCache(name),
+            Cache::queryCache(subject),
+            Cache::queryCache(body)};
         s->recv(email);
         getShell()->addLog(ipSender, "[Sent: " + subject + "]");
         cout << "E-mail sent to " << name << "@" << ipRecv << " from " << localname << "@" << ipSender << "." << endl;
@@ -92,9 +97,9 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
         }
         
         Email *email = emails[name][index];
-        cout << "Sender: " << email->nameSource << "@" << email->ipSender << endl;
-        cout << "Subject: " << email->subject << endl;
-        cout << email->body << endl;
+        cout << "Sender: " << email->nameSource->get() << "@" << email->ipSender->toString() << endl;
+        cout << "Subject: " << email->subject->get() << endl;
+        cout << email->body->get() << endl;
     }, true);
     getShell()->add("delete", [this] (vector<string> args) {
         if(args.size() < 2) {
@@ -118,16 +123,17 @@ SMTPService::SMTPService(unsigned int version): ShellService("SMTP", 25, version
 }
 
 void SMTPService::recv(Email *email) {
-    getShell()->addLog(email->ipSender, "[Received: " + email->subject + "]");
-    if(emails.find(email->nameTarget) == emails.end()) {
-        emails[email->nameTarget] = vector<Email*>{email};
+    getShell()->addLog(email->ipSender,
+                       "[Received: " + email->subject->get() + "]");
+    if(emails.find(email->nameTarget->get()) == emails.end()) {
+        emails[email->nameTarget->get()] = vector<Email*>{email};
     }else{
-        emails[email->nameTarget].push_back(email);
+        emails[email->nameTarget->get()].push_back(email);
     }
     
     // notify if addressed to us
-    if(email->nameTarget == getShell()->getSession().first && getShell()->isAuthenticated()) {
-        cout << "New e-mail from " << email->nameSource << "@" << email->ipSender << "!" << endl;
+    if(email->nameTarget->get() == getShell()->getSession().first && getShell()->isAuthenticated()) {
+        cout << endl << "New e-mail from " << email->nameSource->get() << "@" << email->ipSender->toString() << "!" << endl;
     }
 }
 

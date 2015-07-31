@@ -17,7 +17,7 @@ inline unsigned int max(unsigned int x, unsigned int y) {
     }
 }
 
-FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
+FTPService::FTPService(unsigned int version): ShellService(Cache::queryCache("FTP"), 21, version) {
     Shell* shell = getShell();
     shell->add("help", [this] (vector<string> args) {
         cout << "list: list all files" << endl;
@@ -31,7 +31,7 @@ FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
         cout << "Size" << endl;
         for(File *file: files) {
             cout << left << setw(width) << file->name;
-            cout << file->contents.length() << "b" << endl;
+            cout << file->contents->get().length() << "b" << endl;
         }
     }, true);
     shell->add("upload", [this] (vector<string> args) {
@@ -46,7 +46,7 @@ FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
         // check file
         File *file = nullptr;
         for(File *f: files) {
-            if(f->name == filename) {
+            if(f->name->get() == filename) {
                 file = new File{f->name, f->contents};
                 break;
             }
@@ -87,7 +87,7 @@ FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
         string name = args[1];
         for(auto itr = files.begin(); itr != files.end(); itr++) {
             File *file = *itr;
-            if(file->name == name) {
+            if(file->name->get() == name) {
                 files.erase(itr);
                 return;
             }
@@ -103,7 +103,7 @@ FTPService::FTPService(unsigned int version): ShellService("FTP", 21, version) {
         
         string name = args[1];
         for(File *file: files) {
-            if(file->name == name) {
+            if(file->name->get() == name) {
                 cout << file->contents << endl;
                 return;
             }
@@ -121,8 +121,8 @@ void FTPService::run(Host *host) {
 void FTPService::upload(File *file) {
     files.push_back(file);
     
-    if(file->name.length() > width) {
-        width = max(file->name.length(), 9) + 1;
+    if(file->name->get().length() > width) {
+        width = max(file->name->get().length(), 9) + 1;
     }
 }
 
@@ -134,7 +134,9 @@ void FTPService::randomInit(ResourceGenerator *gen) {
     // add random files
     unsigned int count = rand() % 10;
     for(unsigned int i = 0; i < count; i++) {
-        upload(new File{"file-" + to_string(i), gen->randomFile()});
+        upload(new File{
+            Cache::queryCache("file-" + to_string(i)),
+            gen->randomFile()});
     }
 }
 

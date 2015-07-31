@@ -13,6 +13,7 @@
 #include <set>
 #include <memory>
 #include "Vulnerability.h"
+#include "Record.h"
 
 class Person;
 class Host;
@@ -26,7 +27,7 @@ private:
     // port the service runs on
     unsigned int port;
     // name of service
-    std::string name;
+    StringRecord* name;
     // version
     unsigned int version;
     // store vulnerabilities
@@ -34,13 +35,13 @@ private:
 
 public:
     // ctor
-    Service(std::string name, unsigned int port, unsigned int version);
+    Service(StringRecord* name, unsigned int port, unsigned int version);
     
     // print banner
     std::string printBanner();
     
     // getters
-    std::string getName();
+    StringRecord* getName();
     unsigned int getPort();
     unsigned int getVersion();
     

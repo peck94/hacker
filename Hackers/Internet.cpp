@@ -18,7 +18,7 @@ Internet::Internet(ResourceGenerator *gen, unsigned int size, unsigned int maxVe
 
     // add localhost
     localhost = new Localhost();
-    Person *player = new Person(localhost, username, password);
+    Person *player = new Person(localhost, Cache::queryCache(username), Cache::queryCache(password));
     people[localhost->getIP()->toString()].push_back(player);
     
     // register services
@@ -107,8 +107,8 @@ Service* Internet::randomService() {
 }
 
 Person* Internet::randomPerson(Host *host) {
-    string username = gen->randomName();
-    string password = gen->randomPassword();
+    StringRecord* username = gen->randomName();
+    StringRecord* password = gen->randomPassword();
     
     return new Person(host, username, password);
 }

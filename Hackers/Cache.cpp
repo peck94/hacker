@@ -9,6 +9,8 @@
 #include "Cache.h"
 using namespace std;
 
+map<string, StringRecord*> Cache::records;
+
 bool Cache::isCached(string item) {
     return records.find(item) != records.end();
 }
@@ -21,16 +23,20 @@ StringRecord* Cache::queryCache(string item, string contents) {
     return getCache(item);
 }
 
+StringRecord* Cache::queryCache(string item) {
+    return queryCache(item, item);
+}
+
 void Cache::addCache(string item, string contents) {
-    records[item] = new StringRecord(contents);
+    Cache::records[item] = new StringRecord(contents);
 }
 
 StringRecord* Cache::getCache(string item) {
-    return records[item];
+    return Cache::records[item];
 }
 
 Cache::~Cache() {
-    for(auto p: records) {
+    for(auto p: Cache::records) {
         delete p.second;
     }
 }

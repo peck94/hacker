@@ -18,7 +18,6 @@
 #include "SMTPService.h"
 #include "FinanceService.h"
 #include "FTPService.h"
-#include "Cacher.h"
 
 class Internet;
 class FinanceService;
@@ -34,9 +33,9 @@ private:
     // store system we own
     Host *host;
     // store username
-    std::string name;
+    StringRecord* name;
     // store password
-    std::string password;
+    StringRecord* password;
     // store resource generator
     ResourceGenerator *generator;
     // store current victim
@@ -44,12 +43,12 @@ private:
     
 public:
     // init
-    Person(Host *host, std::string name, std::string password);
+    Person(Host *host, StringRecord* name, StringRecord* password);
 
     // getters
     Host* getHost();
-    std::string getName();
-    std::string getPassword();
+    StringRecord* getName();
+    StringRecord* getPassword();
     
     // AI
     virtual void animate(ResourceGenerator *gen, Internet *internet);

@@ -14,6 +14,8 @@
 #include "Robber.h"
 #include "Cracker.h"
 #include "TransDeleter.h"
+#include "Cache.h"
+#include "Record.h"
 #include <vector>
 #include <string>
 #include <stdlib.h>
@@ -32,23 +34,21 @@ private:
     std::vector<factory> programs;
     unsigned int num_emails;
     unsigned int num_files;
-    // store cache
-    std::map<std::string, std::string> cache;
     // store max version
     unsigned int maxVersion;
 
-    std::string randomString(std::vector<std::string> resource);
-    std::string randomContents(std::string path, unsigned int count);
+    StringRecord* randomString(std::vector<std::string> resource);
+    StringRecord* randomContents(std::string path, unsigned int count);
     void loadFile(std::string filename, std::vector<std::string>& resource);
     
 public:
     ResourceGenerator(unsigned int maxVersion);
     
-    std::string randomName();
-    std::string randomPassword();
-    std::string randomEmail();
-    std::string randomSubject();
-    std::string randomFile();
+    StringRecord* randomName();
+    StringRecord* randomPassword();
+    StringRecord* randomEmail();
+    StringRecord* randomSubject();
+    StringRecord* randomFile();
     Program* randomProgram();
     
     unsigned int getNumPrograms();

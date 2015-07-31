@@ -12,14 +12,16 @@
 #include "ShellService.h"
 #include "Shell.h"
 #include "ResourceGenerator.h"
+#include "Record.h"
+#include "Cache.h"
 #include <list>
 #include <iomanip>
 
 class ResourceGenerator;
 
 struct File {
-    std::string name;
-    std::string contents;
+    StringRecord* name;
+    StringRecord* contents;
 };
 
 /*

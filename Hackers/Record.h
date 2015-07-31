@@ -23,6 +23,10 @@ public:
     Record(T contents) {
         this->contents = contents;
     }
+    
+    const T& get() const {
+        return contents;
+    }
 };
 
 template class Record<std::string>;

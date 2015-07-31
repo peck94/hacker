@@ -9,7 +9,7 @@
 #include "FinanceService.h"
 using namespace std;
 
-FinanceService::FinanceService(unsigned int version): ShellService("Finance", 8080, version) {
+FinanceService::FinanceService(unsigned int version): ShellService(Cache::queryCache("Finance"), 8080, version) {
     getShell()->add("help", [this] (vector<string> args) {
         cout << "status: check your account" << endl;
         cout << "transfer: transfer money to another account" << endl;

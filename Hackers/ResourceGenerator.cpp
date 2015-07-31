@@ -11,7 +11,7 @@ using namespace std;
 
 ResourceGenerator::ResourceGenerator(unsigned int maxVersion) {
     this->maxVersion = maxVersion;
-    
+
     // load resources
     loadFile("resources/usernames.txt", usernames);
     loadFile("resources/passwords.txt", passwords);
@@ -50,22 +50,23 @@ void ResourceGenerator::loadFile(string filename, vector<string>& resource) {
     }
 }
 
-string ResourceGenerator::randomString(vector<string> resource) {
+StringRecord* ResourceGenerator::randomString(vector<string> resource) {
     if(resource.size() > 0) {
-        return resource[rand() % resource.size()];
+        string s = resource[rand() % resource.size()];
+        return Cache::queryCache(s, s);
     }else{
         cerr << "Error: empty resource" << endl;
-        return "";
+        return nullptr;
     }
 }
 
-string ResourceGenerator::randomContents(string path, unsigned int count) {
+StringRecord* ResourceGenerator::randomContents(string path, unsigned int count) {
     unsigned int num = rand() % count;
     string contents = "";
     
     string filename = path + to_string(num) + ".txt";
-    if(cache.find(filename) != cache.end()) {
-        return cache[filename];
+    if(Cache::isCached(filename)) {
+        return Cache::getCache(filename);
     }
     
     ifstream file(filename, ios_base::in);
@@ -80,28 +81,26 @@ string ResourceGenerator::randomContents(string path, unsigned int count) {
     }
     file.close();
     
-    cache[filename] = contents;
-    
-    return contents;
+    return Cache::queryCache(filename, contents);
 }
 
-string ResourceGenerator::randomName() {
+StringRecord* ResourceGenerator::randomName() {
     return randomString(usernames);
 }
 
-string ResourceGenerator::randomPassword() {
+StringRecord* ResourceGenerator::randomPassword() {
     return randomString(passwords);
 }
 
-string ResourceGenerator::randomSubject() {
+StringRecord* ResourceGenerator::randomSubject() {
     return randomString(subjects);
 }
 
-string ResourceGenerator::randomEmail() {
+StringRecord* ResourceGenerator::randomEmail() {
     return randomContents("resources/emails/", num_emails);
 }
 
-string ResourceGenerator::randomFile() {
+StringRecord* ResourceGenerator::randomFile() {
     return randomContents("resources/articles/", num_files);
 }
 
